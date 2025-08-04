@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Users, Clock, ShoppingCart, Baby, Heart, Briefcase } from "lucide-react";
+import { scrollToSignupForm } from "@/lib/scroll-utils";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import heroImageFamily from "@/assets/hero-family-cooking.jpg";
 // Import placeholder images - replace these with actual downloaded images
@@ -123,6 +124,7 @@ const Hero = () => {
                           variant="cta" 
                           size="lg"
                           className="text-lg px-8 py-6 h-auto"
+                          onClick={scrollToSignupForm}
                         >
                           Comece seu teste de 14 dias grátis
                         </Button>
@@ -160,7 +162,10 @@ const Hero = () => {
             </div>
             
             {/* Floating WhatsApp Badge */}
-            <div className="absolute -bottom-4 -left-4 bg-whatsapp text-whatsapp-foreground px-4 py-2 rounded-full shadow-medium flex items-center gap-2">
+            <div 
+              className="absolute -bottom-4 -left-4 bg-whatsapp text-whatsapp-foreground px-4 py-2 rounded-full shadow-medium flex items-center gap-2 cursor-pointer hover:bg-whatsapp/90 transition-colors"
+              onClick={scrollToSignupForm}
+            >
               <MessageCircle className="w-4 h-4" />
               <span className="text-sm font-medium">Receba no WhatsApp</span>
             </div>

@@ -1,4 +1,5 @@
 import { MessageCircle, Mail, Instagram, Heart } from "lucide-react";
+import { scrollToSignupForm } from "@/lib/scroll-utils";
 
 const Footer = () => {
   return (
@@ -23,9 +24,9 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="font-semibold">Produto</h4>
             <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#" className="hover:text-white">Como funciona</a></li>
-              <li><a href="#" className="hover:text-white">Preços</a></li>
-              <li><a href="#" className="hover:text-white">Teste grátis</a></li>
+              <li><a href="#how-it-works" className="hover:text-white">Como funciona</a></li>
+              <li><a href="#pricing" className="hover:text-white">Preços</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSignupForm(); }} className="hover:text-white">Teste grátis</a></li>
               <li><a href="#" className="hover:text-white">Perguntas frequentes</a></li>
             </ul>
           </div>
@@ -36,7 +37,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-white/80">
               <li><a href="#" className="hover:text-white">Central de ajuda</a></li>
               <li><a href="#" className="hover:text-white">Contato</a></li>
-              <li><a href="#" className="hover:text-white">WhatsApp</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); scrollToSignupForm(); }} className="hover:text-white">WhatsApp</a></li>
               <li><a href="#" className="hover:text-white">Feedback</a></li>
             </ul>
           </div>
