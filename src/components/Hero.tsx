@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Users, Clock, ShoppingCart, Baby, Heart, Briefcase } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useState, useEffect } from "react";
-import heroMothers from "@/assets/hero-mothers-babies.jpg";
-import heroDietary from "@/assets/hero-dietary-restrictions.jpg";
-import heroProfessionals from "@/assets/hero-professionals.jpg";
+import heroImage from "@/assets/hero-family-cooking.jpg";
 
 const carouselSlides = [
   {
@@ -12,8 +9,6 @@ const carouselSlides = [
     subtitle: "Refeições para Mães",
     tagline: "Introdução alimentar e receitas práticas",
     description: "Receba cardápios especiais para bebês iniciando sólidos e receitas práticas para toda a família, sem complicação.",
-    image: heroMothers,
-    imageAlt: "Mãe com bebê em ambiente familiar acolhedor",
     features: [
       { icon: Baby, text: "Introdução alimentar" },
       { icon: Users, text: "Para toda família" },
@@ -26,8 +21,6 @@ const carouselSlides = [
     subtitle: "Refeições Especiais",
     tagline: "Respeitando suas restrições alimentares",
     description: "Cardápios personalizados para vegetarianos, intolerantes à lactose, celíacos e outras necessidades específicas.",
-    image: heroDietary,
-    imageAlt: "Pessoas compartilhando refeições saudáveis e especiais",
     features: [
       { icon: Heart, text: "Sem restrições" },
       { icon: Users, text: "Nutrição balanceada" },
@@ -40,8 +33,6 @@ const carouselSlides = [
     subtitle: "Refeições Práticas",
     tagline: "Para profissionais ocupados",
     description: "Cardápios otimizados para quem tem pouco tempo, mas não abre mão de uma alimentação saudável e saborosa.",
-    image: heroProfessionals,
-    imageAlt: "Profissional trabalhando com organização e praticidade",
     features: [
       { icon: Briefcase, text: "Vida corrida" },
       { icon: Users, text: "Casais e solteiros" },
@@ -52,7 +43,6 @@ const carouselSlides = [
 ];
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
       {/* Background Pattern */}
@@ -68,13 +58,6 @@ const Hero = () => {
                 loop: true,
               }}
               className="w-full"
-              setApi={(api) => {
-                if (api) {
-                  api.on("select", () => {
-                    setCurrentSlide(api.selectedScrollSnap());
-                  });
-                }
-              }}
             >
               <CarouselContent>
                 {carouselSlides.map((slide, index) => (
@@ -130,13 +113,13 @@ const Hero = () => {
             </Carousel>
           </div>
 
-          {/* Hero Image - Changes with carousel */}
+          {/* Hero Image */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-strong">
               <img 
-                src={carouselSlides[currentSlide].image} 
-                alt={carouselSlides[currentSlide].imageAlt}
-                className="w-full h-auto object-cover transition-all duration-500"
+                src={heroImage} 
+                alt="Família brasileira cozinhando juntos" 
+                className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
