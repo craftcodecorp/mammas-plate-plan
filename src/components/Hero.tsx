@@ -1,7 +1,12 @@
+import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Users, Clock, ShoppingCart, Baby, Heart, Briefcase } from "lucide-react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import heroImage from "@/assets/hero-family-cooking.jpg";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
+import heroImageFamily from "@/assets/hero-family-cooking.jpg";
+// Import placeholder images - replace these with actual downloaded images
+import heroImageMothers from "@/assets/hero-images/mothers-meal-planning.jpg";
+import heroImageSpecial from "@/assets/hero-images/special-dietary-meal-planning.jpg";
+import heroImageProfessionals from "@/assets/hero-images/busy-professionals-meal-planning.jpg";
 
 const carouselSlides = [
   {
@@ -9,6 +14,8 @@ const carouselSlides = [
     subtitle: "Refeições para Mães",
     tagline: "Introdução alimentar e receitas práticas",
     description: "Receba cardápios especiais para bebês iniciando sólidos e receitas práticas para toda a família, sem complicação.",
+    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    alt: "Mãe preparando refeição saudável para bebê",
     features: [
       { icon: Baby, text: "Introdução alimentar" },
       { icon: Users, text: "Para toda família" },
@@ -21,6 +28,8 @@ const carouselSlides = [
     subtitle: "Refeições Especiais",
     tagline: "Respeitando suas restrições alimentares",
     description: "Cardápios personalizados para vegetarianos, intolerantes à lactose, celíacos e outras necessidades específicas.",
+    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    alt: "Pessoa preparando refeição com alimentos para dietas especiais",
     features: [
       { icon: Heart, text: "Sem restrições" },
       { icon: Users, text: "Nutrição balanceada" },
@@ -33,6 +42,8 @@ const carouselSlides = [
     subtitle: "Refeições Práticas",
     tagline: "Para profissionais ocupados",
     description: "Cardápios otimizados para quem tem pouco tempo, mas não abre mão de uma alimentação saudável e saborosa.",
+    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    alt: "Profissional ocupado preparando refeição rápida e saudável",
     features: [
       { icon: Briefcase, text: "Vida corrida" },
       { icon: Users, text: "Casais e solteiros" },
@@ -43,6 +54,21 @@ const carouselSlides = [
 ];
 
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [api, setApi] = React.useState<CarouselApi>();
+  
+  React.useEffect(() => {
+    if (!api) return;
+    
+    const handleSelect = () => {
+      setCurrentSlide(api.selectedScrollSnap());
+    };
+    
+    api.on("select", handleSelect);
+    return () => {
+      api.off("select", handleSelect);
+    };
+  }, [api]);
   return (
     <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
       {/* Background Pattern */}
@@ -58,6 +84,7 @@ const Hero = () => {
                 loop: true,
               }}
               className="w-full"
+              setApi={setApi}
             >
               <CarouselContent>
                 {carouselSlides.map((slide, index) => (
@@ -113,15 +140,23 @@ const Hero = () => {
             </Carousel>
           </div>
 
-          {/* Hero Image */}
+          {/* Hero Image - Dynamic based on current slide */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-strong">
-              <img 
-                src={heroImage} 
-                alt="Família brasileira cozinhando juntos" 
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <div className="relative rounded-2xl overflow-hidden shadow-strong h-[500px]">
+              {carouselSlides.map((slide, index) => (
+                <div 
+                  key={index} 
+                  className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+                  id={`hero-image-${index}`}
+                >
+                  <img 
+                    src={slide.image} 
+                    alt={slide.alt} 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              ))}
             </div>
             
             {/* Floating WhatsApp Badge */}
