@@ -16,9 +16,16 @@ const testimonials = [
     avatar: "👶"
   },
   {
+    name: "Carlos Mendes",
+    role: "Executivo, intolerante à lactose",
+    content: "Finalmente encontrei um serviço que entende minhas restrições alimentares. Recebo receitas deliciosas sem lactose toda semana.",
+    rating: 5,
+    avatar: "👨‍💼"
+  },
+  {
     name: "Rafael & Juliana",
-    role: "Casal sem filhos",
-    content: "Economizamos tempo e dinheiro. A lista de compras é super organizada e não desperdiçamos mais comida.",
+    role: "Casal profissional",
+    content: "Economizamos tempo e dinheiro. A lista de compras é super organizada e não desperdiçamos mais comida. Perfeito para nossa rotina corrida!",
     rating: 5,
     avatar: "👫"
   }
@@ -30,14 +37,14 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            O que as famílias estão falando
+            O que nossos usuários estão falando
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Centenas de famílias brasileiras já transformaram sua rotina alimentar.
+            Famílias, pessoas com restrições alimentares e profissionais ocupados já transformaram sua rotina.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}

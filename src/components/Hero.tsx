@@ -15,7 +15,7 @@ const Hero = () => {
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                 Planejamento de
-                <span className="block text-secondary-glow">Refeições Familiar</span>
+                <span className="block text-secondary-glow">Refeições Inteligente</span>
                 <span className="block text-lg lg:text-xl font-normal text-white/90 mt-4">
                   Direto no seu WhatsApp
                 </span>
@@ -23,7 +23,7 @@ const Hero = () => {
               
               <p className="text-xl text-white/90 max-w-lg">
                 Receba semanalmente um cardápio personalizado e lista de compras 
-                organizada, pensados especialmente para sua família brasileira.
+                organizada, seja para sua família, restrições alimentares ou vida corrida.
               </p>
             </div>
 
@@ -35,7 +35,7 @@ const Hero = () => {
               </div>
               <div className="flex items-center gap-3 text-white/90">
                 <Users className="w-5 h-5 text-secondary-glow" />
-                <span className="text-sm">Para toda família</span>
+                <span className="text-sm">Para todos os perfis</span>
               </div>
               <div className="flex items-center gap-3 text-white/90">
                 <Clock className="w-5 h-5 text-secondary-glow" />

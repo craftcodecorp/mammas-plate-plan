@@ -19,7 +19,7 @@ const features = [
   {
     icon: Heart,
     title: "Nutrição Balanceada",
-    description: "Refeições equilibradas que atendem às necessidades nutricionais de cada membro da família."
+    description: "Refeições equilibradas para famílias, pessoas com restrições alimentares e profissionais ocupados."
   },
   {
     icon: Clock,
@@ -28,8 +28,8 @@ const features = [
   },
   {
     icon: Users,
-    title: "Para Toda Família",
-    description: "Desde bebês iniciando alimentação sólida até adultos com restrições alimentares."
+    title: "Para Todos os Perfis",
+    description: "Famílias com bebês, pessoas com restrições alimentares e profissionais com pouco tempo para cozinhar."
   }
 ];
 
@@ -39,11 +39,11 @@ const Features = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Tudo que sua família precisa
+            Tudo que você precisa
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Simplificamos o planejamento das refeições para que você tenha mais tempo 
-            com quem realmente importa.
+            Simplificamos o planejamento das refeições para mães ocupadas, pessoas com 
+            restrições alimentares e profissionais com rotina corrida.
           </p>
         </div>
 
