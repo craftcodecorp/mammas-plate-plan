@@ -3,11 +3,8 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, Users, Clock, ShoppingCart, Baby, Heart, Briefcase } from "lucide-react";
 import { scrollToSignupForm } from "@/lib/scroll-utils";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
-import heroImageFamily from "@/assets/hero-family-cooking.jpg";
-// Import placeholder images - replace these with actual downloaded images
-import heroImageMothers from "@/assets/hero-images/mothers-meal-planning.jpg";
-import heroImageSpecial from "@/assets/hero-images/special-dietary-meal-planning.jpg";
-import heroImageProfessionals from "@/assets/hero-images/busy-professionals-meal-planning.jpg";
+import OptimizedImage from "@/components/ui/optimized-image";
+import { heroImages, placeholders, generateColorPlaceholder } from "@/lib/image-utils";
 
 const carouselSlides = [
   {
@@ -15,7 +12,8 @@ const carouselSlides = [
     subtitle: "Refeições para Mães",
     tagline: "Introdução alimentar e receitas práticas",
     description: "Receba cardápios especiais para bebês iniciando sólidos e receitas práticas para toda a família, sem complicação.",
-    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    image: heroImages.mothers,
+    placeholder: placeholders.mothers,
     alt: "Mãe preparando refeição saudável para bebê",
     features: [
       { icon: Baby, text: "Introdução alimentar" },
@@ -29,7 +27,8 @@ const carouselSlides = [
     subtitle: "Refeições Especiais",
     tagline: "Respeitando suas restrições alimentares",
     description: "Cardápios personalizados para vegetarianos, intolerantes à lactose, celíacos e outras necessidades específicas.",
-    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    image: heroImages.special,
+    placeholder: placeholders.special,
     alt: "Pessoa preparando refeição com alimentos para dietas especiais",
     features: [
       { icon: Heart, text: "Sem restrições" },
@@ -43,7 +42,8 @@ const carouselSlides = [
     subtitle: "Refeições Práticas",
     tagline: "Para profissionais ocupados",
     description: "Cardápios otimizados para quem tem pouco tempo, mas não abre mão de uma alimentação saudável e saborosa.",
-    image: heroImageFamily, // Using existing image as fallback until user replaces with actual image
+    image: heroImages.professionals,
+    placeholder: placeholders.professionals,
     alt: "Profissional ocupado preparando refeição rápida e saudável",
     features: [
       { icon: Briefcase, text: "Vida corrida" },
@@ -151,10 +151,13 @@ const Hero = () => {
                   className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
                   id={`hero-image-${index}`}
                 >
-                  <img 
-                    src={slide.image} 
-                    alt={slide.alt} 
+                  <OptimizedImage
+                    src={slide.image}
+                    placeholderSrc={generateColorPlaceholder(800, 500, '#e0e0e0')}
+                    alt={slide.alt}
                     className="w-full h-full object-cover"
+                    effect="blur"
+                    wrapperClassName="w-full h-full"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>

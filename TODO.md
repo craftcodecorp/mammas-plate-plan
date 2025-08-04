@@ -26,25 +26,26 @@
 - [x] Add loading states for form submission
 
 ## Phase 3: Enhancement
-- [ ] Replace placeholder images with final assets
-- [ ] Optimize image loading with lazy loading
-- [ ] Implement animations for better user engagement
-- [ ] Add microinteractions to improve UX
+- [x] Replace placeholder images with final assets
+- [x] Optimize image loading with lazy loading
+- [x] Implement animations for better user engagement
+- [x] Add microinteractions to improve UX
 - [ ] Create custom illustrations for each target persona
-- [ ] Implement dark mode support
-- [ ] Add language switching capability (Portuguese/English)
-- [ ] Create FAQ section
-- [ ] Add blog section with sample recipes/meal plans
+- [x] Implement dark mode support
+- [x] Add language switching capability (Portuguese/English)
+- [x] Create FAQ section
+- [x] Add blog section with sample recipes/meal plans
+- [x] Fix Hero component image display issues
 
 ## Phase 4: Testing & Optimization
-- [ ] Set up A/B testing for CTA buttons
-- [ ] Implement heatmap tracking
-- [ ] Optimize for Core Web Vitals
-- [ ] Perform cross-browser compatibility testing
-- [ ] Conduct mobile responsiveness testing
-- [ ] Implement SEO optimizations
-- [ ] Set up analytics to track conversion rates
-- [ ] Perform accessibility audit and improvements (WCAG compliance)
+- [x] Set up A/B testing for CTA buttons
+- [x] Implement heatmap tracking
+- [x] Optimize for Core Web Vitals
+- [x] Perform cross-browser compatibility testing
+- [x] Conduct mobile responsiveness testing
+- [x] Implement SEO optimizations
+- [x] Set up analytics to track conversion rates
+- [x] Perform accessibility audit and improvements (WCAG compliance)
 
 ## Phase 5: Deployment & Monitoring
 - [ ] Configure CI/CD pipeline
