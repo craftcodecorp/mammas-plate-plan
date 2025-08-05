@@ -14,7 +14,7 @@ const faqItems = [
   },
   {
     question: "Quanto custa o serviço?",
-    answer: "Oferecemos um teste gratuito de 14 dias para que você experimente o serviço sem compromisso. Após esse período, o valor é de R$29,90 por mês, com possibilidade de cancelamento a qualquer momento."
+    answer: "Oferecemos um teste gratuito de 7 dias para que você experimente o serviço sem compromisso. Após esse período, o valor é de R$29,90 por mês, com possibilidade de cancelamento a qualquer momento."
   },
   {
     question: "Como são elaborados os cardápios?",

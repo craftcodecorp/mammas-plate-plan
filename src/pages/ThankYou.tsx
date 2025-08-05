@@ -89,7 +89,7 @@ const ThankYou = () => {
             <div>
               <h3 className="font-semibold mb-1">Seu teste gratuito começou</h3>
               <p className="text-muted-foreground text-sm">
-                Você tem acesso a 14 dias de cardápios personalizados. Não se preocupe, avisaremos antes do término.
+                Você tem acesso a 7 dias de cardápios personalizados. Não se preocupe, avisaremos antes do término.
               </p>
             </div>
           </div>

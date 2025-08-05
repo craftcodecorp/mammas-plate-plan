@@ -63,7 +63,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'pricing.feature.ajustes': 'Ajustes sob demanda',
     'pricing.feature.suporte': 'Suporte via WhatsApp',
     'pricing.cta': 'Começar Agora',
-    'pricing.trial': 'Teste grátis de 14 dias',
+    'pricing.trial': 'Teste grátis de 7 dias',
     
     // FAQ section
     'faq.title': 'Perguntas Frequentes',
@@ -71,7 +71,7 @@ export const translations: Record<Language, Record<string, string>> = {
     
     // CTA section
     'cta.title': 'Pronto para simplificar sua rotina alimentar?',
-    'cta.subtitle': 'Experimente o Cardápio Fácil gratuitamente por 14 dias',
+    'cta.subtitle': 'Experimente o Cardápio Fácil gratuitamente por 7 dias',
     'cta.button': 'Começar Teste Grátis',
     
     // Footer

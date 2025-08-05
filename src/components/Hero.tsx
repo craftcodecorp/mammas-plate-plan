@@ -127,7 +127,7 @@ const Hero = () => {
                           className="text-lg px-8 py-6 h-auto"
                           onClick={scrollToSignupForm}
                         >
-                          Comece seu teste de 14 dias grátis
+                          Comece seu teste de 7 dias grátis
                         </Button>
                         
                         <p className="text-sm text-white/80">

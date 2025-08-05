@@ -144,7 +144,7 @@ const CTASection = () => {
             
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur text-white px-6 py-3 rounded-full">
               <Gift className="w-5 h-5 text-secondary-glow" />
-              <span className="font-semibold">14 dias grátis • Sem compromisso</span>
+              <span className="font-semibold">7 dias grátis • Sem compromisso</span>
             </div>
           </div>
 
@@ -258,7 +258,7 @@ const CTASection = () => {
                 ) : (
                   <>
                     <MessageCircle className="w-5 h-5 mr-2" />
-                    Começar teste grátis de 14 dias
+                    Começar teste grátis de 7 dias
                   </>
                 )}
               </Button>

@@ -65,7 +65,7 @@ export const sendWelcomeMessage = async (data: SignupData): Promise<boolean> => 
     welcomeMessage += "Suas restrições alimentares serão respeitadas em todas as refeições sugeridas.\n\n";
   }
   
-  welcomeMessage += "Seu teste gratuito de 14 dias começou hoje! Não se preocupe, avisaremos antes do término.\n\n";
+  welcomeMessage += "Seu teste gratuito de 7 dias começou hoje! Não se preocupe, avisaremos antes do término.\n\n";
   welcomeMessage += "Equipe Cardápio Fácil";
   
   return sendWhatsAppMessage({

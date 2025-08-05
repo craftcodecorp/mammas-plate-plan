@@ -45,7 +45,7 @@ This project is a conversion-focused landing page for a digital service that del
 
 ## Call-to-Action
 
-The primary conversion goal is to encourage visitors to "Start Your 14-Day Free Trial" by:
+The primary conversion goal is to encourage visitors to "Start Your 7-Day Free Trial" by:
 - Providing their name
 - Sharing their WhatsApp number
 - Indicating basic dietary preferences
@@ -53,7 +53,7 @@ The primary conversion goal is to encourage visitors to "Start Your 14-Day Free 
 
 ## Pricing Structure
 
-- **Free Trial Period**: 14 days with full access to all features
+- **Free Trial Period**: 7 days with full access to all features
 - **Monthly Subscription**: Starting at R$9.90
   - Additional customization options available at higher price points
 - **Flexible Terms**: No contracts, cancel anytime policy
