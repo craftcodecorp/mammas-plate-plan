@@ -5,10 +5,11 @@
  * metrics to improve website performance.
  */
 
-import { onCLS, onFID, onLCP, onFCP, onTTFB } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+// Note: FID is deprecated in web-vitals v5+, using INP instead
 
 // Define the types for metric data
-type MetricName = 'CLS' | 'FID' | 'LCP' | 'FCP' | 'TTFB';
+type MetricName = 'CLS' | 'INP' | 'LCP' | 'FCP' | 'TTFB';
 
 interface MetricData {
   name: MetricName;
@@ -56,10 +57,10 @@ export const initWebVitals = (reportHandler: ReportHandler = reportMetric): void
     });
   });
   
-  // Measure First Input Delay (FID)
-  onFID(metric => {
+  // Measure Interaction to Next Paint (INP) - replaces FID in web-vitals v5+
+  onINP(metric => {
     reportHandler({
-      name: 'FID',
+      name: 'INP',
       value: metric.value,
       id: metric.id,
     });
@@ -108,9 +109,9 @@ export const getPerformanceHints = (metrics: Record<MetricName, number>): string
     hints.push('Improve LCP: Optimize image loading, use server-side rendering, or implement caching strategies.');
   }
   
-  // Check First Input Delay (FID)
-  if (metrics.FID > 100) {
-    hints.push('Improve FID: Break up long tasks, optimize JavaScript execution, or defer non-critical JavaScript.');
+  // Check Interaction to Next Paint (INP)
+  if (metrics.INP > 200) {
+    hints.push('Improve INP: Break up long tasks, optimize JavaScript execution, or defer non-critical JavaScript.');
   }
   
   // Check Cumulative Layout Shift (CLS)

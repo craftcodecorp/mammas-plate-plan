@@ -5,6 +5,7 @@ import { AccessibilityProvider } from '@/components/accessibility/accessibility-
 import { AnalyticsProvider } from '@/lib/analytics/analytics-provider';
 import { PerformanceProvider } from '@/components/performance/performance-provider';
 import { ResponsiveTester } from '@/components/testing/responsive-tester';
+import { ErrorMonitoringProvider } from '@/components/monitoring/error-monitoring-provider';
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -24,20 +25,33 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     enablePageTracking: process.env.NODE_ENV === 'production',
   };
 
+  // Sentry configuration
+  const sentryConfig = {
+    sentryDsn: import.meta.env.VITE_SENTRY_DSN as string,
+    environment: import.meta.env.MODE,
+    release: import.meta.env.VITE_APP_VERSION as string || '1.0.0',
+  };
+
   return (
     <BrowserRouter>
-      <HelmetProvider>
-        <AccessibilityProvider>
-          <PerformanceProvider>
-            <AnalyticsProvider config={analyticsConfig}>
-              {children}
-              
-              {/* Only show responsive tester in development */}
-              <ResponsiveTester onlyInDevelopment={true} />
-            </AnalyticsProvider>
-          </PerformanceProvider>
-        </AccessibilityProvider>
-      </HelmetProvider>
+      <ErrorMonitoringProvider
+        sentryDsn={sentryConfig.sentryDsn}
+        environment={sentryConfig.environment}
+        release={sentryConfig.release}
+      >
+        <HelmetProvider>
+          <AccessibilityProvider>
+            <PerformanceProvider>
+              <AnalyticsProvider config={analyticsConfig}>
+                {children}
+                
+                {/* Only show responsive tester in development */}
+                <ResponsiveTester onlyInDevelopment={true} />
+              </AnalyticsProvider>
+            </PerformanceProvider>
+          </AccessibilityProvider>
+        </HelmetProvider>
+      </ErrorMonitoringProvider>
     </BrowserRouter>
   );
 };

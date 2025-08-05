@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // Use the repository name as base when deploying to GitHub Pages
+  base: mode === 'production' ? '/mammas-plate-plan/' : '/',
   plugins: [
     react(),
     mode === 'development' &&

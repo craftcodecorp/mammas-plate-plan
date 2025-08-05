@@ -1,8 +1,8 @@
-# Welcome to your Lovable project
+# Mamma's Plate Plan - Weekly Meal Planner
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/00857f39-909f-4740-9ac4-a6da68cc485e
+A comprehensive weekly meal planning application designed to help users organize their meals, manage recipes, and optimize grocery shopping.
 
 ## How can I edit this code?
 
@@ -60,14 +60,49 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/00857f39-909f-4740-9ac4-a6da68cc485e) and click on Share -> Publish.
+### GitHub Pages Deployment
 
-## Can I connect a custom domain to my Lovable project?
+This project is configured to automatically deploy to GitHub Pages using GitHub Actions. The workflow is defined in `.github/workflows/deploy.yml` and will build and deploy the application whenever changes are pushed to the `main` branch.
 
-Yes, you can!
+#### Environment Variables
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Copy the `.env.example` file to create your own `.env` file with the necessary environment variables:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```sh
+cp .env.example .env
+```
+
+Update the values in the `.env` file with your own API keys and configuration.
+
+### Manual Deployment
+
+To manually build and deploy the project:
+
+```sh
+# Build the project
+npm run build
+
+# Preview the build locally
+npm run preview
+```
+
+## Monitoring & Analytics
+
+### Error Monitoring with Sentry
+
+The application uses Sentry for error tracking and performance monitoring. To configure Sentry:
+
+1. Create a Sentry account and project at [sentry.io](https://sentry.io)
+2. Add your Sentry DSN to the `.env` file as `VITE_SENTRY_DSN`
+
+### Analytics & Testing
+
+The application includes integrations for:
+
+- Google Analytics for user behavior tracking
+- Hotjar for heatmaps and session recordings
+- Amplitude Experiment for A/B testing
+
+Configure these services by adding the appropriate API keys to your `.env` file.
