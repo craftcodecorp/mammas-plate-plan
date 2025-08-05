@@ -37,14 +37,15 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
   
   // Check if we're in development mode
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = import.meta.env.MODE === 'development';
   
   // Don't render in production if onlyInDevelopment is true
-  const shouldRender = !(onlyInDevelopment && !isDevelopment);
+  if (onlyInDevelopment && !isDevelopment) {
+    return null; // Don't render anything in production
+  }
   
   // Get browser information and viewport size on mount
   useEffect(() => {
-    if (!shouldRender) return;
     const getInfo = async () => {
       try {
         const info = await detectBrowser();
@@ -72,7 +73,7 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
     return () => {
       window.removeEventListener('resize', updateViewportSize);
     };
-  }, [shouldRender]);
+  }, []);
   
   // Toggle visibility of the tester panel
   const toggleVisibility = () => {

@@ -46,7 +46,7 @@ export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
                 {children}
                 
                 {/* Only show responsive tester in development */}
-                <ResponsiveTester onlyInDevelopment={true} />
+                {import.meta.env.MODE === 'development' && <ResponsiveTester />}
               </AnalyticsProvider>
             </PerformanceProvider>
           </AccessibilityProvider>
