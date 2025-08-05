@@ -70,26 +70,27 @@ const Hero = () => {
       api.off("select", handleSelect);
     };
   }, [api]);
+  
   return (
     <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
       
       <div className="relative container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          {/* Carousel Content */}
-          <div className="text-white">
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-              setApi={setApi}
-            >
-              <CarouselContent>
-                {carouselSlides.map((slide, index) => (
-                  <CarouselItem key={index}>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+          setApi={setApi}
+        >
+          <CarouselContent>
+            {carouselSlides.map((slide, index) => (
+              <CarouselItem key={index} className="overflow-visible">
+                <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                  {/* Carousel Content */}
+                  <div className="text-white">
                     <div className="space-y-8">
                       <div className="space-y-4">
                         <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -134,46 +135,38 @@ const Hero = () => {
                         </p>
                       </div>
                     </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-4 bg-white/20 text-white border-white/30 hover:bg-white/30" />
-              <CarouselNext className="right-4 bg-white/20 text-white border-white/30 hover:bg-white/30" />
-            </Carousel>
-          </div>
+                  </div>
 
-          {/* Hero Image - Dynamic based on current slide */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-strong h-[500px]">
-              {carouselSlides.map((slide, index) => (
-                <div 
-                  key={index} 
-                  className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-                  id={`hero-image-${index}`}
-                >
-                  <OptimizedImage
-                    src={slide.image}
-                    placeholderSrc={generateColorPlaceholder(800, 500, '#e0e0e0')}
-                    alt={slide.alt}
-                    className="w-full h-full object-cover"
-                    effect="blur"
-                    wrapperClassName="w-full h-full"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  {/* Hero Image */}
+                  <div className="relative">
+                    <div className="relative rounded-2xl overflow-hidden shadow-strong h-[500px]">
+                      <OptimizedImage
+                        src={slide.image}
+                        placeholderSrc={generateColorPlaceholder(800, 500, '#e0e0e0')}
+                        alt={slide.alt}
+                        className="w-full h-full object-cover"
+                        effect="blur"
+                        wrapperClassName="w-full h-full"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    
+                    {/* Floating WhatsApp Badge */}
+                    <div 
+                      className="absolute -bottom-4 -left-4 bg-whatsapp text-whatsapp-foreground px-4 py-2 rounded-full shadow-medium flex items-center gap-2 cursor-pointer hover:bg-whatsapp/90 transition-colors"
+                      onClick={scrollToSignupForm}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span className="text-sm font-medium">Receba no WhatsApp</span>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
-            
-            {/* Floating WhatsApp Badge */}
-            <div 
-              className="absolute -bottom-4 -left-4 bg-whatsapp text-whatsapp-foreground px-4 py-2 rounded-full shadow-medium flex items-center gap-2 cursor-pointer hover:bg-whatsapp/90 transition-colors"
-              onClick={scrollToSignupForm}
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span className="text-sm font-medium">Receba no WhatsApp</span>
-            </div>
-          </div>
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute -left-5 top-1/2 -translate-y-1/2 bg-white/30 text-white border-white/40 hover:bg-white/40 shadow-md z-10" />
+          <CarouselNext className="absolute -right-5 top-1/2 -translate-y-1/2 bg-white/30 text-white border-white/40 hover:bg-white/40 shadow-md z-10" />
+        </Carousel>
       </div>
     </section>
   );

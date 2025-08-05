@@ -6,23 +6,23 @@
 
 // Import existing images
 import heroImageFamily from "../assets/hero-family-cooking.jpg";
-// Using the family image for all hero slides since the other images are empty (0 bytes)
+import heroImageMothers from "../assets/hero-images/mothers-meal-planning.jpg";
+import heroImageSpecial from "../assets/hero-images/special-dietary-meal-planning.jpg";
+import heroImageProfessionals from "../assets/hero-images/busy-professionals-meal-planning.jpg";
 
 // Define image maps for different sections
 export const heroImages = {
-  // Using the family image for all hero slides until proper images are available
-  mothers: heroImageFamily,
-  special: heroImageFamily,
-  professionals: heroImageFamily,
+  mothers: heroImageMothers,
+  special: heroImageSpecial,
+  professionals: heroImageProfessionals,
   family: heroImageFamily,
 };
 
 // Low-quality image placeholders (could be base64 encoded tiny images)
 export const placeholders = {
-  // Using the family image for all placeholders until proper images are available
-  mothers: heroImageFamily,
-  special: heroImageFamily,
-  professionals: heroImageFamily,
+  mothers: heroImageMothers,
+  special: heroImageSpecial,
+  professionals: heroImageProfessionals,
   family: heroImageFamily,
 };
 

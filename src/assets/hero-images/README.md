@@ -8,9 +8,9 @@ This directory contains images for the hero carousel. Please replace these place
    - Theme: Meal planning for mothers with babies
    - Suggested content: Mother preparing baby food or family meal with baby nearby
 
-2. `special-dietary-meal-planning.jpg` - Image showing meal preparation for special dietary needs
-   - Theme: Meal planning for people with dietary restrictions
-   - Suggested content: Person preparing vegetarian/gluten-free/special diet meals
+   2. `special-dietary-meal-planning.jpg` - Image showing meal preparation for special dietary needs
+      - Theme: Meal planning for people with dietary restrictions
+      - Suggested content: Person preparing vegetarian/gluten-free/special diet meals
 
 3. `busy-professionals-meal-planning.jpg` - Image showing quick meal preparation for busy people
    - Theme: Meal planning for busy professionals
