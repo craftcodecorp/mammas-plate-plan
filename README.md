@@ -90,19 +90,29 @@ npm run preview
 
 ## Monitoring & Analytics
 
-### Error Monitoring with Sentry
+### Custom Error Monitoring
 
-The application uses Sentry for error tracking and performance monitoring. To configure Sentry:
+The application uses a lightweight custom error logging solution that:
 
-1. Create a Sentry account and project at [sentry.io](https://sentry.io)
-2. Add your Sentry DSN to the `.env` file as `VITE_SENTRY_DSN`
+- Logs errors to the console during development
+- Stores recent errors in localStorage (limited to 20 most recent)
+- Optionally sends error logs to a custom endpoint
+
+To configure the error logging endpoint:
+
+```
+# In your .env file
+VITE_ERROR_LOG_ENDPOINT=/api/log-error
+```
 
 ### Analytics & Testing
 
 The application includes integrations for:
 
 - Google Analytics for user behavior tracking
+  - Configure with `VITE_GA_MEASUREMENT_ID` in your `.env` file
 - Hotjar for heatmaps and session recordings
-- Amplitude Experiment for A/B testing
-
-Configure these services by adding the appropriate API keys to your `.env` file.
+  - Configure with `VITE_HOTJAR_SITE_ID` in your `.env` file
+- A/B testing with optional Amplitude integration
+  - Configure with `VITE_AMPLITUDE_API_KEY` and `VITE_EXPERIMENT_API_KEY` in your `.env` file
+  - See [A/B Testing Documentation](./docs/AB_TESTING.md) for detailed usage instructions

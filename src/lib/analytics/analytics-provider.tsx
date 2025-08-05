@@ -2,29 +2,41 @@ import React, { createContext, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { initializeHotjar, trackPageView } from './heatmap';
 import { initializeGoogleAnalytics, trackGAPageView } from './google-analytics';
+import { initializeAmplitude, getExperimentVariant, trackExperimentConversion, ExperimentResult, Experiment } from './ab-testing';
 
 // Define context type
 interface AnalyticsContextType {
-  trackEvent: (eventName: string, eventData?: Record<string, any>) => void;
-  trackConversion: (conversionName: string, conversionData?: Record<string, any>) => void;
+  trackEvent: (eventName: string, eventData?: Record<string, unknown>) => void;
+  trackConversion: (conversionName: string, conversionData?: Record<string, unknown>) => void;
+  getExperimentVariant: (experimentId: string, userId?: string, experimentConfig?: Experiment) => ExperimentResult;
+  trackExperimentConversion: (experimentId: string, conversionEvent: string, properties?: Record<string, unknown>) => void;
 }
 
 // Create context with default values
 const AnalyticsContext = createContext<AnalyticsContextType>({
   trackEvent: () => {},
   trackConversion: () => {},
+  getExperimentVariant: () => ({
+    variant: 'control',
+    experimentId: '',
+    experimentName: '',
+    isDefault: true
+  }),
+  trackExperimentConversion: () => {}
 });
 
 // Analytics configuration
 interface AnalyticsConfig {
   hotjarSiteId?: number;
   googleAnalyticsId?: string;
+  amplitudeApiKey?: string;
+  experimentApiKey?: string;
   enablePageTracking?: boolean;
 }
 
 interface AnalyticsProviderProps {
   children: React.ReactNode;
-  config: AnalyticsConfig;
+  config?: AnalyticsConfig;
 }
 
 /**
@@ -34,7 +46,13 @@ interface AnalyticsProviderProps {
  */
 export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({ 
   children, 
-  config 
+  config = {
+    hotjarSiteId: Number(import.meta.env.VITE_HOTJAR_SITE_ID) || undefined,
+    googleAnalyticsId: import.meta.env.VITE_GA_MEASUREMENT_ID as string || undefined,
+    amplitudeApiKey: import.meta.env.VITE_AMPLITUDE_API_KEY as string || undefined,
+    experimentApiKey: import.meta.env.VITE_EXPERIMENT_API_KEY as string || undefined,
+    enablePageTracking: true
+  }
 }) => {
   const location = useLocation();
   
@@ -49,7 +67,12 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
     if (config.googleAnalyticsId) {
       initializeGoogleAnalytics(config.googleAnalyticsId);
     }
-  }, [config.hotjarSiteId, config.googleAnalyticsId]);
+    
+    // Initialize Amplitude for A/B testing if API keys are provided
+    if (config.amplitudeApiKey && config.experimentApiKey) {
+      initializeAmplitude(config.amplitudeApiKey, config.experimentApiKey);
+    }
+  }, [config.hotjarSiteId, config.googleAnalyticsId, config.amplitudeApiKey, config.experimentApiKey]);
   
   // Track page views when location changes
   useEffect(() => {
@@ -65,10 +88,10 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
   }, [location, config.enablePageTracking]);
   
   // Track custom events across analytics platforms
-  const trackEvent = (eventName: string, eventData?: Record<string, any>) => {
+  const trackEvent = (eventName: string, eventData?: Record<string, unknown>) => {
     // Track in Google Analytics
     if (window.gtag) {
-      window.gtag('event', eventName, eventData);
+      window.gtag('event', eventName, eventData as Record<string, string | number | boolean>);
     }
     
     // Track in Hotjar
@@ -80,7 +103,7 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
   };
   
   // Track conversions (specialized events)
-  const trackConversion = (conversionName: string, conversionData?: Record<string, any>) => {
+  const trackConversion = (conversionName: string, conversionData?: Record<string, unknown>) => {
     // Track as a regular event but with conversion flag
     trackEvent(conversionName, {
       ...conversionData,
@@ -90,9 +113,23 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
     console.log(`Conversion tracked: ${conversionName}`, conversionData);
   };
   
+  // Implement A/B testing methods
+  const runExperiment = (experimentId: string, userId?: string, experimentConfig?: Experiment): ExperimentResult => {
+    return getExperimentVariant(experimentId, userId, experimentConfig);
+  };
+  
+  const trackExperimentResult = (experimentId: string, conversionEvent: string, properties?: Record<string, unknown>): void => {
+    trackExperimentConversion(experimentId, conversionEvent, properties);
+  };
+  
   // Provide analytics functions to children
   return (
-    <AnalyticsContext.Provider value={{ trackEvent, trackConversion }}>
+    <AnalyticsContext.Provider value={{
+      trackEvent,
+      trackConversion,
+      getExperimentVariant: runExperiment,
+      trackExperimentConversion: trackExperimentResult
+    }}>
       {children}
     </AnalyticsContext.Provider>
   );

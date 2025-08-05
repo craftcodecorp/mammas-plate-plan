@@ -5,16 +5,7 @@
  * and generating heatmaps using Hotjar.
  */
 
-// Define the Hotjar window object
-declare global {
-  interface Window {
-    hj?: (...args: any[]) => void;
-    _hjSettings?: {
-      hjid: number;
-      hjsv: number;
-    };
-  }
-}
+// Type definitions are now centralized in google-analytics.ts
 
 /**
  * Initialize Hotjar with your site ID
@@ -53,7 +44,7 @@ export const trackPageView = (url: string): void => {
  * @param userId - Unique identifier for the user
  * @param userAttributes - Additional user attributes
  */
-export const identifyUser = (userId: string, userAttributes?: Record<string, any>): void => {
+export const identifyUser = (userId: string, userAttributes?: Record<string, unknown>): void => {
   if (window.hj) {
     if (userAttributes) {
       window.hj('identify', userId, userAttributes);

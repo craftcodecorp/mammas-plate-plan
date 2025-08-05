@@ -5,11 +5,20 @@
  * using Google Analytics 4.
  */
 
-// Define the gtag function
+// Define the gtag function and other analytics globals
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: <T = Record<string, unknown>>(
+      command: string,
+      target?: string | Date,
+      params?: T
+    ) => void;
+    dataLayer?: Array<Record<string, unknown>>;
+    hj?: (command: string, ...args: unknown[]) => void;
+    _hjSettings?: {
+      hjid: number;
+      hjsv: number;
+    };
   }
 }
 
@@ -25,8 +34,12 @@ export const initializeGoogleAnalytics = (measurementId: string): void => {
   window.dataLayer = window.dataLayer || [];
   
   // Define gtag function
-  window.gtag = function() {
-    window.dataLayer?.push(arguments);
+  window.gtag = function<T = Record<string, unknown>>(
+    command: string,
+    target?: string | Date,
+    params?: T
+  ) {
+    window.dataLayer?.push({ command, target, params });
   };
   
   // Set the timestamp
@@ -67,7 +80,7 @@ export const trackGAPageView = (path: string, title?: string): void => {
  * @param eventName - Name of the event to track
  * @param eventParams - Additional parameters for the event
  */
-export const trackGAEvent = (eventName: string, eventParams?: Record<string, any>): void => {
+export const trackGAEvent = (eventName: string, eventParams?: Record<string, unknown>): void => {
   if (window.gtag) {
     window.gtag('event', eventName, eventParams);
     console.log('Google Analytics event tracked:', eventName, eventParams);
@@ -78,7 +91,7 @@ export const trackGAEvent = (eventName: string, eventParams?: Record<string, any
  * Set user properties in Google Analytics
  * @param properties - User properties to set
  */
-export const setUserProperties = (properties: Record<string, any>): void => {
+export const setUserProperties = (properties: Record<string, unknown>): void => {
   if (window.gtag) {
     window.gtag('set', 'user_properties', properties);
     console.log('Google Analytics user properties set:', properties);

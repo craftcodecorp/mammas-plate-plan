@@ -28,7 +28,7 @@ interface ErrorMonitoringProviderProps {
  */
 export const ErrorMonitoringProvider: React.FC<ErrorMonitoringProviderProps> = ({
   children,
-  logEndpoint,
+  logEndpoint = import.meta.env.VITE_ERROR_LOG_ENDPOINT as string,
   environment = import.meta.env.MODE,
   appVersion = import.meta.env.VITE_APP_VERSION as string || '1.0.0',
 }) => {
