@@ -64,7 +64,7 @@ export const PerformanceProvider: React.FC<PerformanceProviderProps> = ({ childr
     
     // After the page is fully loaded and idle
     if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => {
+      (window as unknown as { requestIdleCallback: typeof requestIdleCallback }).requestIdleCallback(() => {
         setIsOptimized(true);
         performance.mark('optimization-complete');
       });

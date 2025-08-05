@@ -114,9 +114,5 @@ export const trackConversion = (experimentName: string, variant: ExperimentVaria
   }
 };
 
-// Add TypeScript interface for gtag
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}
+// Note: gtag is already defined in google-analytics.ts
+// No need to redeclare it here
