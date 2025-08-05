@@ -4,25 +4,68 @@
  * This file contains helper functions and constants related to images
  */
 
-// Import existing images
-import heroImageFamily from "../assets/hero-family-cooking.jpg";
-import heroImageMothers from "../assets/hero-images/mothers-meal-planning.jpg";
-import heroImageSpecial from "../assets/hero-images/special-dietary-meal-planning.jpg";
-import heroImageProfessionals from "../assets/hero-images/busy-professionals-meal-planning.jpg";
+// Import optimized images for different screen sizes
+// Mothers meal planning
+import mothersWeb from "../assets/hero-images/optimized/mothers-meal-planning-web.jpg";
+import mothersTablet from "../assets/hero-images/optimized/mothers-meal-planning-tablet.jpg";
+import mothersMobile from "../assets/hero-images/optimized/mothers-meal-planning-mobile.jpg";
+import mothersSmall from "../assets/hero-images/optimized/mothers-meal-planning-small.jpg";
 
-// Define image maps for different sections
-export const heroImages = {
-  mothers: heroImageMothers,
-  special: heroImageSpecial,
-  professionals: heroImageProfessionals,
-  family: heroImageFamily,
+// Special dietary meal planning
+import specialWeb from "../assets/hero-images/optimized/special-dietary-web.jpg";
+import specialTablet from "../assets/hero-images/optimized/special-dietary-tablet.jpg";
+import specialMobile from "../assets/hero-images/optimized/special-dietary-mobile.jpg";
+import specialSmall from "../assets/hero-images/optimized/special-dietary-small.jpg";
+
+// Busy professionals meal planning
+import professionalsWeb from "../assets/hero-images/optimized/busy-professionals-web.jpg";
+import professionalsTablet from "../assets/hero-images/optimized/busy-professionals-tablet.jpg";
+import professionalsMobile from "../assets/hero-images/optimized/busy-professionals-mobile.jpg";
+import professionalsSmall from "../assets/hero-images/optimized/busy-professionals-small.jpg";
+
+// Family cooking (keeping original for now)
+import heroImageFamily from "../assets/hero-family-cooking.jpg";
+
+// Define responsive image sets for different sections
+export interface ResponsiveImageSet {
+  web: string;
+  tablet: string;
+  mobile: string;
+  small: string;
+}
+
+export const heroImages: Record<string, ResponsiveImageSet> = {
+  mothers: {
+    web: mothersWeb,
+    tablet: mothersTablet,
+    mobile: mothersMobile,
+    small: mothersSmall,
+  },
+  special: {
+    web: specialWeb,
+    tablet: specialTablet,
+    mobile: specialMobile,
+    small: specialSmall,
+  },
+  professionals: {
+    web: professionalsWeb,
+    tablet: professionalsTablet,
+    mobile: professionalsMobile,
+    small: professionalsSmall,
+  },
+  family: {
+    web: heroImageFamily,
+    tablet: heroImageFamily,
+    mobile: heroImageFamily,
+    small: heroImageFamily,
+  },
 };
 
-// Low-quality image placeholders (could be base64 encoded tiny images)
+// Low-quality image placeholders
 export const placeholders = {
-  mothers: heroImageMothers,
-  special: heroImageSpecial,
-  professionals: heroImageProfessionals,
+  mothers: mothersSmall,
+  special: specialSmall,
+  professionals: professionalsSmall,
   family: heroImageFamily,
 };
 

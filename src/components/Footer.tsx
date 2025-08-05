@@ -56,7 +56,7 @@ const Footer = () => {
 
         <div className="border-t border-white/20 mt-8 pt-8 text-center">
           <p className="text-white/80 text-sm flex items-center justify-center gap-2">
-            © 2024 Meal Planner. Feito com <Heart className="w-4 h-4 text-red-400" /> para famílias brasileiras.
+            © 2025 Meal Planner. Feito com <Heart className="w-4 h-4 text-red-400" /> para famílias brasileiras.
           </p>
         </div>
       </div>

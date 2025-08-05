@@ -4,7 +4,8 @@ import { MessageCircle, Users, Clock, ShoppingCart, Baby, Heart, Briefcase } fro
 import { scrollToSignupForm } from "@/lib/scroll-utils";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import OptimizedImage from "@/components/ui/optimized-image";
-import { heroImages, placeholders, generateColorPlaceholder } from "@/lib/image-utils";
+import { heroImages, placeholders, generateColorPlaceholder, ResponsiveImageSet } from "@/lib/image-utils";
+import { useEffect, useState } from "react";
 
 const carouselSlides = [
   {
@@ -140,14 +141,19 @@ const Hero = () => {
                   {/* Hero Image */}
                   <div className="relative">
                     <div className="relative rounded-2xl overflow-hidden shadow-strong h-[500px]">
-                      <OptimizedImage
-                        src={slide.image}
-                        placeholderSrc={generateColorPlaceholder(800, 500, '#e0e0e0')}
-                        alt={slide.alt}
-                        className="w-full h-full object-cover"
-                        effect="blur"
-                        wrapperClassName="w-full h-full"
-                      />
+                      <picture>
+                        <source media="(min-width: 1280px)" srcSet={slide.image.web} />
+                        <source media="(min-width: 768px)" srcSet={slide.image.tablet} />
+                        <source media="(min-width: 480px)" srcSet={slide.image.mobile} />
+                        <OptimizedImage
+                          src={slide.image.web}
+                          placeholderSrc={slide.image.small}
+                          alt={slide.alt}
+                          className="w-full h-full object-cover"
+                          effect="blur"
+                          wrapperClassName="w-full h-full"
+                        />
+                      </picture>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     </div>
                     
