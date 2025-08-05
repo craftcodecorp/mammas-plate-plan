@@ -20,24 +20,24 @@ interface AppProvidersProps {
 export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   // Analytics configuration
   const analyticsConfig = {
-    hotjarSiteId: process.env.NODE_ENV === 'production' ? 12345 : undefined, // Replace with your actual Hotjar ID in production
-    googleAnalyticsId: process.env.NODE_ENV === 'production' ? 'G-XXXXXXXXXX' : undefined, // Replace with your actual GA4 ID
-    enablePageTracking: process.env.NODE_ENV === 'production',
+    hotjarSiteId: import.meta.env.PROD ? 12345 : undefined, // Replace with your actual Hotjar ID in production
+    googleAnalyticsId: import.meta.env.PROD ? 'G-XXXXXXXXXX' : undefined, // Replace with your actual GA4 ID
+    enablePageTracking: import.meta.env.PROD,
   };
 
-  // Sentry configuration
-  const sentryConfig = {
-    sentryDsn: import.meta.env.VITE_SENTRY_DSN as string,
+  // Error monitoring configuration
+  const errorMonitoringConfig = {
+    logEndpoint: import.meta.env.VITE_ERROR_LOG_ENDPOINT as string,
     environment: import.meta.env.MODE,
-    release: import.meta.env.VITE_APP_VERSION as string || '1.0.0',
+    appVersion: import.meta.env.VITE_APP_VERSION as string || '1.0.0',
   };
 
   return (
     <BrowserRouter>
       <ErrorMonitoringProvider
-        sentryDsn={sentryConfig.sentryDsn}
-        environment={sentryConfig.environment}
-        release={sentryConfig.release}
+        logEndpoint={errorMonitoringConfig.logEndpoint}
+        environment={errorMonitoringConfig.environment}
+        appVersion={errorMonitoringConfig.appVersion}
       >
         <HelmetProvider>
           <AccessibilityProvider>
