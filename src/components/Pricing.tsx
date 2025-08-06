@@ -31,7 +31,7 @@ const Pricing = () => {
               </h3>
               
               <div className="mb-4">
-                <span className="text-4xl font-bold text-primary">R$ 9,90</span>
+                <span className="text-4xl font-bold text-primary">R$ 14,90</span>
                 <span className="text-muted-foreground">/mês</span>
               </div>
               

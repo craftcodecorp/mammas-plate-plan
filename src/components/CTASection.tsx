@@ -2,11 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { MessageCircle, Gift, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { validateName, validateWhatsApp, validateSelect, formatWhatsAppNumber } from "@/lib/form-validation";
+import { validateName, validateWhatsApp, validateSelect, formatWhatsAppNumber, prepareWhatsAppNumber } from "@/lib/form-validation";
 import { sendWelcomeMessage } from "@/lib/whatsapp-service";
+import { createPartialProfile } from "@/lib/user-service";
 import { useToast } from "@/components/ui/use-toast";
 
 const CTASection = () => {
@@ -17,14 +19,18 @@ const CTASection = () => {
     name: "",
     whatsapp: "",
     familySize: "",
-    dietaryRestrictions: ""
+    dietaryRestrictions: "",
+    acceptedTerms: false,
+    acceptedPrivacyPolicy: false
   });
   
   const [errors, setErrors] = useState({
     name: "",
     whatsapp: "",
     familySize: "",
-    dietaryRestrictions: ""
+    dietaryRestrictions: "",
+    acceptedTerms: "",
+    acceptedPrivacyPolicy: ""
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,7 +38,9 @@ const CTASection = () => {
     name: false,
     whatsapp: false,
     familySize: false,
-    dietaryRestrictions: false
+    dietaryRestrictions: false,
+    acceptedTerms: false,
+    acceptedPrivacyPolicy: false
   });
   
   // Format WhatsApp number as user types
@@ -73,15 +81,19 @@ const CTASection = () => {
     const nameError = validateName(formData.name);
     const whatsappError = validateWhatsApp(formData.whatsapp);
     const familySizeError = validateSelect(formData.familySize);
+    const termsError = !formData.acceptedTerms ? "Você precisa aceitar os termos de uso" : "";
+    const privacyError = !formData.acceptedPrivacyPolicy ? "Você precisa aceitar a política de privacidade" : "";
     
     setErrors({
       name: nameError || "",
       whatsapp: whatsappError || "",
       familySize: familySizeError || "",
-      dietaryRestrictions: ""
+      dietaryRestrictions: "",
+      acceptedTerms: termsError,
+      acceptedPrivacyPolicy: privacyError
     });
     
-    return !nameError && !whatsappError && !familySizeError;
+    return !nameError && !whatsappError && !familySizeError && !termsError && !privacyError;
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
@@ -92,7 +104,9 @@ const CTASection = () => {
       name: true,
       whatsapp: true,
       familySize: true,
-      dietaryRestrictions: true
+      dietaryRestrictions: true,
+      acceptedTerms: true,
+      acceptedPrivacyPolicy: true
     });
     
     if (!validateForm()) {
@@ -107,20 +121,36 @@ const CTASection = () => {
     setIsSubmitting(true);
     
     try {
-      // Send welcome message via WhatsApp
+      // First create partial profile in User Management Service
+      const profileResponse = await createPartialProfile({
+        name: formData.name,
+        phoneNumber: prepareWhatsAppNumber(formData.whatsapp),
+        familySize: formData.familySize,
+        dietaryRestrictions: formData.dietaryRestrictions || undefined,
+        acceptedTerms: formData.acceptedTerms,
+        acceptedPrivacyPolicy: formData.acceptedPrivacyPolicy
+      });
+      
+      if (!profileResponse.success) {
+        throw new Error(profileResponse.error?.message || "Falha ao criar perfil");
+      }
+      
+      // Then send welcome message via WhatsApp
       const messageSent = await sendWelcomeMessage(formData);
       
       if (messageSent) {
         // Navigate to thank you page with form data
         navigate("/thank-you", { state: { formData } });
       } else {
-        throw new Error("Falha ao enviar mensagem de WhatsApp");
+        // Even if WhatsApp message fails, we can still proceed since the profile was created
+        console.warn("WhatsApp message failed to send, but profile was created");
+        navigate("/thank-you", { state: { formData } });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
         title: "Erro ao processar seu cadastro",
-        description: "Por favor, tente novamente em alguns instantes.",
+        description: error instanceof Error ? error.message : "Por favor, tente novamente em alguns instantes.",
         variant: "destructive"
       });
     } finally {
@@ -263,10 +293,53 @@ const CTASection = () => {
                 )}
               </Button>
 
-              <p className="text-center text-sm text-muted-foreground">
-                Ao cadastrar-se, você concorda com nossos termos de uso e política de privacidade.
-                Seu primeiro cardápio chegará em até 24 horas.
-              </p>
+              <div className="space-y-4 mt-4">
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="terms" 
+                    checked={formData.acceptedTerms}
+                    onCheckedChange={(checked) => {
+                      setFormData({...formData, acceptedTerms: checked === true});
+                      setFormTouched({...formTouched, acceptedTerms: true});
+                    }}
+                    className={errors.acceptedTerms ? "border-red-500" : ""}
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Aceito os <a href="#" className="text-primary underline">termos de uso</a>
+                  </label>
+                </div>
+                {errors.acceptedTerms && (
+                  <p className="text-sm text-red-500 mt-1">{errors.acceptedTerms}</p>
+                )}
+                
+                <div className="flex items-center space-x-2">
+                  <Checkbox 
+                    id="privacy" 
+                    checked={formData.acceptedPrivacyPolicy}
+                    onCheckedChange={(checked) => {
+                      setFormData({...formData, acceptedPrivacyPolicy: checked === true});
+                      setFormTouched({...formTouched, acceptedPrivacyPolicy: true});
+                    }}
+                    className={errors.acceptedPrivacyPolicy ? "border-red-500" : ""}
+                  />
+                  <label
+                    htmlFor="privacy"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Aceito a <a href="#" className="text-primary underline">política de privacidade</a>
+                  </label>
+                </div>
+                {errors.acceptedPrivacyPolicy && (
+                  <p className="text-sm text-red-500 mt-1">{errors.acceptedPrivacyPolicy}</p>
+                )}
+                
+                <p className="text-center text-sm text-muted-foreground mt-2">
+                  Seu primeiro cardápio chegará em até 24 horas após a confirmação do cadastro.
+                </p>
+              </div>
             </form>
           </div>
         </div>

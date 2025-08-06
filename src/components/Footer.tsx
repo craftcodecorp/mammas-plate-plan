@@ -46,10 +46,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="font-semibold">Legal</h4>
             <ul className="space-y-2 text-sm text-white/80">
-              <li><a href="#" className="hover:text-white">Termos de uso</a></li>
-              <li><a href="#" className="hover:text-white">Política de privacidade</a></li>
-              <li><a href="#" className="hover:text-white">Cookies</a></li>
-              <li><a href="#" className="hover:text-white">LGPD</a></li>
+              <li><a href="/terms-of-use" className="hover:text-white">Termos de uso</a></li>
+              <li><a href="/privacy-policy" className="hover:text-white">Política de privacidade</a></li>
+              <li><a href="/terms-of-use#cookies" className="hover:text-white">Cookies</a></li>
+              <li><a href="/privacy-policy#lgpd" className="hover:text-white">LGPD</a></li>
             </ul>
           </div>
         </div>

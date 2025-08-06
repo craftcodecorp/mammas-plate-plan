@@ -161,7 +161,7 @@
 |    |               |      |
 |    | MONTHLY PLAN  |      |
 |    |               |      |
-|    |   R$9.90/mo   |      |
+|    |   R$14.90/mo  |      |
 |    |               |      |
 |    | • Feature point      |
 |    | • Feature point      |

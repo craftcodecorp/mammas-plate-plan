@@ -109,7 +109,7 @@
 |  |                             |  |                             |     |
 |  |        FREE TRIAL           |  |        MONTHLY PLAN         |     |
 |  |                             |  |                             |     |
-|  |         14 DAYS             |  |         R$9.90/mo           |     |
+|  |         14 DAYS             |  |         R$14.90/mo           |     |
 |  |                             |  |                             |     |
 |  | • Feature point             |  | • Feature point             |     |
 |  | • Feature point             |  | • Feature point             |     |

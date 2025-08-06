@@ -54,7 +54,7 @@ The primary conversion goal is to encourage visitors to "Start Your 7-Day Free T
 ## Pricing Structure
 
 - **Free Trial Period**: 7 days with full access to all features
-- **Monthly Subscription**: Starting at R$9.90
+- **Monthly Subscription**: Starting at R$14.90
   - Additional customization options available at higher price points
 - **Flexible Terms**: No contracts, cancel anytime policy
 
