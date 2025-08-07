@@ -278,7 +278,34 @@ export const translations: Record<Language, Record<string, string>> = {
     'seo.privacy.title': 'Política de Privacidade - Mamma\'s Plate Plan',
     'seo.privacy.description': 'Nossa política de privacidade explica como coletamos, usamos e protegemos suas informações pessoais no Mamma\'s Plate Plan.',
     'seo.notfound.title': 'Página não encontrada - Mamma\'s Plate Plan',
-    'seo.notfound.description': 'A página que você está procurando não foi encontrada. Volte para a página inicial do Mamma\'s Plate Plan.'
+    'seo.notfound.description': 'A página que você está procurando não foi encontrada. Volte para a página inicial do Mamma\'s Plate Plan.',
+    
+    // ThankYou page
+    'thankyou.title': 'Obrigado pelo seu cadastro!',
+    'thankyou.subtitle': 'Estamos preparando seu cardápio personalizado.',
+    'thankyou.profile.title': 'Resumo do seu perfil:',
+    'thankyou.profile.name': 'Nome:',
+    'thankyou.profile.family': 'Composição familiar:',
+    'thankyou.profile.restrictions': 'Restrições alimentares:',
+    'thankyou.profile.notInformed': 'Não informado',
+    'thankyou.family.single': 'Apenas eu',
+    'thankyou.family.couple': 'Casal sem filhos',
+    'thankyou.family.baby': 'Casal com bebê (até 2 anos)',
+    'thankyou.family.children': 'Família com crianças (2-12 anos)',
+    'thankyou.family.teens': 'Família com adolescentes',
+    'thankyou.family.mixed': 'Família mista (várias idades)',
+    'thankyou.diet.none': 'Nenhuma restrição',
+    'thankyou.diet.vegetarian': 'Vegetariano',
+    'thankyou.diet.lactose': 'Sem lactose',
+    'thankyou.diet.gluten': 'Sem glúten',
+    'thankyou.diet.diabetic': 'Diabético',
+    'thankyou.diet.multiple': 'Múltiplas restrições',
+    'thankyou.whatsapp.title': 'Aguarde mensagem no WhatsApp',
+    'thankyou.whatsapp.message': 'Enviaremos uma mensagem para {whatsapp} em até 24 horas com seu primeiro cardápio semanal.',
+    'thankyou.whatsapp.defaultNumber': 'seu número',
+    'thankyou.trial.title': 'Seu teste gratuito começou',
+    'thankyou.trial.message': 'Você tem acesso a 7 dias de cardápios personalizados. Não se preocupe, avisaremos antes do término.',
+    'thankyou.button.home': 'Voltar para a página inicial'
   },
   'en-US': {
     // Navigation
@@ -555,6 +582,33 @@ export const translations: Record<Language, Record<string, string>> = {
     'seo.privacy.title': 'Privacy Policy - Mamma\'s Plate Plan',
     'seo.privacy.description': 'Our privacy policy explains how we collect, use, and protect your personal information at Mamma\'s Plate Plan.',
     'seo.notfound.title': 'Page Not Found - Mamma\'s Plate Plan',
-    'seo.notfound.description': 'The page you are looking for was not found. Return to the Mamma\'s Plate Plan homepage.'
+    'seo.notfound.description': 'The page you are looking for was not found. Return to the Mamma\'s Plate Plan homepage.',
+    
+    // ThankYou page
+    'thankyou.title': 'Thank you for your registration!',
+    'thankyou.subtitle': 'We are preparing your personalized meal plan.',
+    'thankyou.profile.title': 'Your profile summary:',
+    'thankyou.profile.name': 'Name:',
+    'thankyou.profile.family': 'Family composition:',
+    'thankyou.profile.restrictions': 'Dietary restrictions:',
+    'thankyou.profile.notInformed': 'Not provided',
+    'thankyou.family.single': 'Just me',
+    'thankyou.family.couple': 'Couple without children',
+    'thankyou.family.baby': 'Couple with baby (up to 2 years)',
+    'thankyou.family.children': 'Family with children (2-12 years)',
+    'thankyou.family.teens': 'Family with teenagers',
+    'thankyou.family.mixed': 'Mixed family (various ages)',
+    'thankyou.diet.none': 'No restrictions',
+    'thankyou.diet.vegetarian': 'Vegetarian',
+    'thankyou.diet.lactose': 'Lactose-free',
+    'thankyou.diet.gluten': 'Gluten-free',
+    'thankyou.diet.diabetic': 'Diabetic',
+    'thankyou.diet.multiple': 'Multiple restrictions',
+    'thankyou.whatsapp.title': 'Wait for a WhatsApp message',
+    'thankyou.whatsapp.message': 'We will send a message to {whatsapp} within 24 hours with your first weekly meal plan.',
+    'thankyou.whatsapp.defaultNumber': 'your number',
+    'thankyou.trial.title': 'Your free trial has started',
+    'thankyou.trial.message': 'You have access to 7 days of personalized meal plans. Don\'t worry, we\'ll notify you before it ends.',
+    'thankyou.button.home': 'Return to home page'
   }
 };
