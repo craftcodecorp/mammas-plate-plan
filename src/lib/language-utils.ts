@@ -265,7 +265,20 @@ export const translations: Record<Language, Record<string, string>> = {
     // Language toggle
     'language.toggle': 'Mudar idioma',
     'language.pt': 'Português',
-    'language.en': 'English'
+    'language.en': 'English',
+    
+    // SEO metadata
+    'seo.home.title': 'Mamma\'s Plate Plan - Planejamento de refeições saudáveis',
+    'seo.home.description': 'Planejamento de refeições saudáveis e deliciosas para toda a família. Economize tempo e dinheiro com nosso serviço de cardápio fácil.',
+    'seo.home.keywords': 'planejamento de refeições, cardápio semanal, receitas saudáveis, economia de tempo, economia de dinheiro',
+    'seo.thankyou.title': 'Obrigado por se inscrever - Mamma\'s Plate Plan',
+    'seo.thankyou.description': 'Agradecemos por se inscrever no Mamma\'s Plate Plan. Você receberá seu primeiro cardápio personalizado em breve.',
+    'seo.terms.title': 'Termos de Uso - Mamma\'s Plate Plan',
+    'seo.terms.description': 'Termos e condições de uso do serviço Mamma\'s Plate Plan. Leia atentamente antes de utilizar nosso serviço.',
+    'seo.privacy.title': 'Política de Privacidade - Mamma\'s Plate Plan',
+    'seo.privacy.description': 'Nossa política de privacidade explica como coletamos, usamos e protegemos suas informações pessoais no Mamma\'s Plate Plan.',
+    'seo.notfound.title': 'Página não encontrada - Mamma\'s Plate Plan',
+    'seo.notfound.description': 'A página que você está procurando não foi encontrada. Volte para a página inicial do Mamma\'s Plate Plan.'
   },
   'en-US': {
     // Navigation
@@ -529,6 +542,19 @@ export const translations: Record<Language, Record<string, string>> = {
     // Language toggle
     'language.toggle': 'Change language',
     'language.pt': 'Português',
-    'language.en': 'English'
+    'language.en': 'English',
+    
+    // SEO metadata
+    'seo.home.title': 'Mamma\'s Plate Plan - Healthy Meal Planning',
+    'seo.home.description': 'Healthy and delicious meal planning for the whole family. Save time and money with our easy meal planning service.',
+    'seo.home.keywords': 'meal planning, weekly menu, healthy recipes, time saving, money saving',
+    'seo.thankyou.title': 'Thank You for Subscribing - Mamma\'s Plate Plan',
+    'seo.thankyou.description': 'Thank you for subscribing to Mamma\'s Plate Plan. You will receive your first personalized meal plan soon.',
+    'seo.terms.title': 'Terms of Use - Mamma\'s Plate Plan',
+    'seo.terms.description': 'Terms and conditions for using the Mamma\'s Plate Plan service. Please read carefully before using our service.',
+    'seo.privacy.title': 'Privacy Policy - Mamma\'s Plate Plan',
+    'seo.privacy.description': 'Our privacy policy explains how we collect, use, and protect your personal information at Mamma\'s Plate Plan.',
+    'seo.notfound.title': 'Page Not Found - Mamma\'s Plate Plan',
+    'seo.notfound.description': 'The page you are looking for was not found. Return to the Mamma\'s Plate Plan homepage.'
   }
 };

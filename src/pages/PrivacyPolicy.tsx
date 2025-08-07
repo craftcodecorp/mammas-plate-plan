@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/use-language";
 
 const PrivacyPolicy = () => {
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -21,12 +21,12 @@ const PrivacyPolicy = () => {
       showBreadcrumbs={true}
       header={<Header />}
       seo={{
-        title: "Política de Privacidade | Mamma's Plate Plan",
-        description: "Política de privacidade do serviço Mamma's Plate Plan. Saiba como protegemos seus dados e informações pessoais.",
+        title: t('seo.privacy.title'),
+        description: t('seo.privacy.description'),
         canonical,
         openGraph: {
-          title: "Política de Privacidade | Mamma's Plate Plan",
-          description: "Política de privacidade do serviço Mamma's Plate Plan. Saiba como protegemos seus dados e informações pessoais.",
+          title: t('seo.privacy.title'),
+          description: t('seo.privacy.description'),
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,

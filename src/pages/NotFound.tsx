@@ -5,7 +5,7 @@ import { useLanguage } from "@/lib/use-language";
 
 const NotFound = () => {
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -23,12 +23,12 @@ const NotFound = () => {
     <PageLayout
       showBreadcrumbs={false}
       seo={{
-        title: "Página não encontrada | Mamma's Plate Plan",
-        description: "A página que você está procurando não existe ou foi movida.",
+        title: t('seo.notfound.title'),
+        description: t('seo.notfound.description'),
         canonical: `${baseUrl}/404`,
         openGraph: {
-          title: "Página não encontrada | Mamma's Plate Plan",
-          description: "A página que você está procurando não existe ou foi movida.",
+          title: t('seo.notfound.title'),
+          description: t('seo.notfound.description'),
           type: 'website',
           url: `${baseUrl}/404`,
         },

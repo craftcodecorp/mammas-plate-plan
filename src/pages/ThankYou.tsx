@@ -8,7 +8,7 @@ import { useLanguage } from "@/lib/use-language";
 const ThankYou = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const formData = location.state?.formData || {};
   
   // Base URL for canonical links
@@ -30,12 +30,12 @@ const ThankYou = () => {
     <PageLayout
       showBreadcrumbs={false}
       seo={{
-        title: "Obrigado pelo seu cadastro | Mamma's Plate Plan",
-        description: "Seu cadastro foi recebido com sucesso. Estamos preparando seu cardápio personalizado.",
+        title: t('seo.thankyou.title'),
+        description: t('seo.thankyou.description'),
         canonical,
         openGraph: {
-          title: "Obrigado pelo seu cadastro | Mamma's Plate Plan",
-          description: "Seu cadastro foi recebido com sucesso. Estamos preparando seu cardápio personalizado.",
+          title: t('seo.thankyou.title'),
+          description: t('seo.thankyou.description'),
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,

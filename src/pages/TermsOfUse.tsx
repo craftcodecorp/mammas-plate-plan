@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/use-language";
 
 const TermsOfUse = () => {
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -21,12 +21,12 @@ const TermsOfUse = () => {
       showBreadcrumbs={true}
       header={<Header />}
       seo={{
-        title: "Termos de Uso | Mamma's Plate Plan",
-        description: "Termos e condições de uso do serviço Mamma's Plate Plan. Leia atentamente antes de utilizar nossos serviços.",
+        title: t('seo.terms.title'),
+        description: t('seo.terms.description'),
         canonical,
         openGraph: {
-          title: "Termos de Uso | Mamma's Plate Plan",
-          description: "Termos e condições de uso do serviço Mamma's Plate Plan. Leia atentamente antes de utilizar nossos serviços.",
+          title: t('seo.terms.title'),
+          description: t('seo.terms.description'),
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,
