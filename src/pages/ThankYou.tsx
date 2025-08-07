@@ -54,46 +54,46 @@ const ThankYou = () => {
           </div>
           
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Obrigado pelo seu cadastro!
+            {t('thankyou.title')}
           </h1>
           
           <p className="text-xl text-muted-foreground">
-            Estamos preparando seu cardápio personalizado.
+            {t('thankyou.subtitle')}
           </p>
         </div>
         
         <div className="bg-muted/50 rounded-xl p-6 mb-8">
-          <h2 className="font-semibold text-lg mb-4">Resumo do seu perfil:</h2>
+          <h2 className="font-semibold text-lg mb-4">{t('thankyou.profile.title')}</h2>
           
           <div className="space-y-3">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Nome:</span>
-              <span className="font-medium">{formData.name || "Não informado"}</span>
+              <span className="text-muted-foreground">{t('thankyou.profile.name')}</span>
+              <span className="font-medium">{formData.name || t('thankyou.profile.notInformed')}</span>
             </div>
             
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Composição familiar:</span>
+              <span className="text-muted-foreground">{t('thankyou.profile.family')}</span>
               <span className="font-medium">
-                {formData.familySize === "single" && "Apenas eu"}
-                {formData.familySize === "couple" && "Casal sem filhos"}
-                {formData.familySize === "baby" && "Casal com bebê (até 2 anos)"}
-                {formData.familySize === "children" && "Família com crianças (2-12 anos)"}
-                {formData.familySize === "teens" && "Família com adolescentes"}
-                {formData.familySize === "mixed" && "Família mista (várias idades)"}
-                {!formData.familySize && "Não informado"}
+                {formData.familySize === "single" && t('thankyou.family.single')}
+                {formData.familySize === "couple" && t('thankyou.family.couple')}
+                {formData.familySize === "baby" && t('thankyou.family.baby')}
+                {formData.familySize === "children" && t('thankyou.family.children')}
+                {formData.familySize === "teens" && t('thankyou.family.teens')}
+                {formData.familySize === "mixed" && t('thankyou.family.mixed')}
+                {!formData.familySize && t('thankyou.profile.notInformed')}
               </span>
             </div>
             
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Restrições alimentares:</span>
+              <span className="text-muted-foreground">{t('thankyou.profile.restrictions')}</span>
               <span className="font-medium">
-                {formData.dietaryRestrictions === "none" && "Nenhuma restrição"}
-                {formData.dietaryRestrictions === "vegetarian" && "Vegetariano"}
-                {formData.dietaryRestrictions === "lactose" && "Sem lactose"}
-                {formData.dietaryRestrictions === "gluten" && "Sem glúten"}
-                {formData.dietaryRestrictions === "diabetic" && "Diabético"}
-                {formData.dietaryRestrictions === "multiple" && "Múltiplas restrições"}
-                {!formData.dietaryRestrictions && "Não informado"}
+                {formData.dietaryRestrictions === "none" && t('thankyou.diet.none')}
+                {formData.dietaryRestrictions === "vegetarian" && t('thankyou.diet.vegetarian')}
+                {formData.dietaryRestrictions === "lactose" && t('thankyou.diet.lactose')}
+                {formData.dietaryRestrictions === "gluten" && t('thankyou.diet.gluten')}
+                {formData.dietaryRestrictions === "diabetic" && t('thankyou.diet.diabetic')}
+                {formData.dietaryRestrictions === "multiple" && t('thankyou.diet.multiple')}
+                {!formData.dietaryRestrictions && t('thankyou.profile.notInformed')}
               </span>
             </div>
           </div>
@@ -105,9 +105,9 @@ const ThankYou = () => {
               <MessageCircle className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Aguarde mensagem no WhatsApp</h3>
+              <h3 className="font-semibold mb-1">{t('thankyou.whatsapp.title')}</h3>
               <p className="text-muted-foreground text-sm">
-                Enviaremos uma mensagem para {formData.whatsapp || "seu número"} em até 24 horas com seu primeiro cardápio semanal.
+                {t('thankyou.whatsapp.message').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))}
               </p>
             </div>
           </div>
@@ -117,9 +117,9 @@ const ThankYou = () => {
               <Calendar className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Seu teste gratuito começou</h3>
+              <h3 className="font-semibold mb-1">{t('thankyou.trial.title')}</h3>
               <p className="text-muted-foreground text-sm">
-                Você tem acesso a 7 dias de cardápios personalizados. Não se preocupe, avisaremos antes do término.
+                {t('thankyou.trial.message')}
               </p>
             </div>
           </div>
@@ -131,7 +131,7 @@ const ThankYou = () => {
             variant="outline"
             className="px-8"
           >
-            Voltar para a página inicial
+            {t('thankyou.button.home')}
           </Button>
         </div>
       </div>
