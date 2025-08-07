@@ -1,46 +1,53 @@
 import { Star, Quote } from "lucide-react";
+import { useLanguage } from "@/lib/use-language";
 
-const testimonials = [
+// Create testimonials array dynamically using translation keys
+const createTestimonials = (t: (key: string) => string) => [
   {
-    name: "Maria Silva",
-    role: "Mãe de 2 filhos",
-    content: "Minha vida mudou! Não preciso mais ficar estressada pensando no que fazer para o almoço. As receitas são deliciosas e os ingredientes sempre frescos.",
+    name: t('testimonials.component.testimonial1.name'),
+    role: t('testimonials.component.testimonial1.role'),
+    content: t('testimonials.component.testimonial1.content'),
     rating: 5,
-    avatar: "👩‍🍳"
+    avatar: t('testimonials.component.testimonial1.avatar')
   },
   {
-    name: "Ana Costa",
-    role: "Mãe de bebê de 8 meses",
-    content: "Perfeito para quem está introduzindo alimentação sólida. As sugestões são nutritivas e adequadas para a idade do meu filho.",
+    name: t('testimonials.component.testimonial2.name'),
+    role: t('testimonials.component.testimonial2.role'),
+    content: t('testimonials.component.testimonial2.content'),
     rating: 5,
-    avatar: "👶"
+    avatar: t('testimonials.component.testimonial2.avatar')
   },
   {
-    name: "Carlos Mendes",
-    role: "Executivo, intolerante à lactose",
-    content: "Finalmente encontrei um serviço que entende minhas restrições alimentares. Recebo receitas deliciosas sem lactose toda semana.",
+    name: t('testimonials.component.testimonial3.name'),
+    role: t('testimonials.component.testimonial3.role'),
+    content: t('testimonials.component.testimonial3.content'),
     rating: 5,
-    avatar: "👨‍💼"
+    avatar: t('testimonials.component.testimonial3.avatar')
   },
   {
-    name: "Rafael & Juliana",
-    role: "Casal profissional",
-    content: "Economizamos tempo e dinheiro. A lista de compras é super organizada e não desperdiçamos mais comida. Perfeito para nossa rotina corrida!",
+    name: t('testimonials.component.testimonial4.name'),
+    role: t('testimonials.component.testimonial4.role'),
+    content: t('testimonials.component.testimonial4.content'),
     rating: 5,
-    avatar: "👫"
+    avatar: t('testimonials.component.testimonial4.avatar')
   }
 ];
 
 const Testimonials = () => {
+  const { t } = useLanguage();
+  
+  // Generate testimonials using the translation function
+  const testimonials = createTestimonials(t);
+  
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            O que nossos usuários estão falando
+            {t('testimonials.component.heading')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Famílias, pessoas com restrições alimentares e profissionais ocupados já transformaram sua rotina.
+            {t('testimonials.component.subheading')}
           </p>
         </div>
 
@@ -81,7 +88,7 @@ const Testimonials = () => {
               ))}
             </div>
             <span className="font-semibold">4.9/5</span>
-            <span>• Baseado em 127 avaliações</span>
+            <span>• {t('testimonials.component.rating.text')}</span>
           </div>
         </div>
       </div>
