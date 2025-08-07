@@ -84,7 +84,7 @@
 - [✅] Update Footer component to use translation keys
 - [✅] Update SEO metadata across all pages to use translation keys
 - [✅] Update ThankYou page to use translation keys
-- [ ] Update TermsOfUse page to use translation keys
+- [✅] Update TermsOfUse page to use translation keys
 - [ ] Update PrivacyPolicy page to use translation keys
 - [ ] Update NotFound page to use translation keys
 - [ ] Review and update existing translation keys for accuracy

@@ -33,7 +33,7 @@ const TermsOfUse = () => {
           siteName: "Mamma's Plate Plan"
         },
         additionalMetaTags: [
-          { name: 'keywords', content: 'termos de uso, condições de serviço, contrato, cardápio fácil, termos legais' }
+          { name: 'keywords', content: t('terms.keywords') }
         ]
       }}
     >
@@ -41,111 +41,111 @@ const TermsOfUse = () => {
         
         <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">Termos de Uso</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-8">{t('terms.title')}</h1>
           
           <div className="prose prose-slate max-w-none">
             <p className="text-muted-foreground mb-6">
-              Última atualização: {new Date().toLocaleDateString('pt-BR')}
+              {t('terms.lastUpdated')} {new Date().toLocaleDateString(language === 'pt-BR' ? 'pt-BR' : 'en-US')}
             </p>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">1. Aceitação dos Termos</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section1.title')}</h2>
               <p>
-                Ao acessar e utilizar o serviço Cardápio Fácil, você concorda em cumprir e estar vinculado aos seguintes termos e condições. Se você não concordar com qualquer parte destes termos, não poderá acessar ou utilizar nossos serviços.
+                {t('terms.section1.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">2. Descrição do Serviço</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section2.title')}</h2>
               <p>
-                O Cardápio Fácil é um serviço de planejamento de refeições personalizadas entregue via WhatsApp. Nosso serviço oferece cardápios semanais, receitas, listas de compras e dicas nutricionais adaptadas às necessidades e preferências de cada família.
+                {t('terms.section2.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">3. Elegibilidade</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section3.title')}</h2>
               <p>
-                Para utilizar o Cardápio Fácil, você deve ter pelo menos 18 anos de idade e possuir capacidade legal para celebrar contratos vinculativos. Ao utilizar nosso serviço, você declara e garante que atende a esses requisitos.
+                {t('terms.section3.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">4. Cadastro e Conta</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section4.title')}</h2>
               <p>
-                Para acessar determinados recursos do nosso serviço, você precisará criar uma conta. Você é responsável por manter a confidencialidade das informações da sua conta e por todas as atividades que ocorrerem nela. Você concorda em:
+                {t('terms.section4.content')}
               </p>
               <ul className="list-disc pl-6 mt-2">
-                <li>Fornecer informações precisas, atuais e completas durante o processo de registro;</li>
-                <li>Manter e atualizar prontamente suas informações de registro;</li>
-                <li>Notificar-nos imediatamente sobre qualquer uso não autorizado da sua conta ou qualquer outra violação de segurança.</li>
+                <li>{t('terms.section4.item1')}</li>
+                <li>{t('terms.section4.item2')}</li>
+                <li>{t('terms.section4.item3')}</li>
               </ul>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">5. Planos e Pagamentos</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section5.title')}</h2>
               <p>
-                O Cardápio Fácil oferece diferentes planos de assinatura. Ao se inscrever em um plano pago, você concorda em pagar todas as taxas aplicáveis conforme especificado no momento da compra. Os pagamentos são processados por provedores de pagamento terceirizados e estão sujeitos aos termos e condições desses provedores.
+                {t('terms.section5.content')}
               </p>
               <p className="mt-2">
-                Você pode cancelar sua assinatura a qualquer momento, mas não haverá reembolsos para períodos parciais de serviço.
+                {t('terms.section5.content2')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">6. Uso do Serviço</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section6.title')}</h2>
               <p>
-                Você concorda em usar o Cardápio Fácil apenas para fins legais e de acordo com estes Termos. Você não deve:
+                {t('terms.section6.content')}
               </p>
               <ul className="list-disc pl-6 mt-2">
-                <li>Usar o serviço de qualquer maneira que possa danificar, desabilitar ou sobrecarregar o serviço;</li>
-                <li>Tentar acessar áreas do serviço às quais você não tem permissão;</li>
-                <li>Usar o serviço para distribuir material publicitário ou promocional não solicitado;</li>
-                <li>Reproduzir, duplicar, copiar, vender, revender ou explorar qualquer parte do serviço sem autorização expressa por escrito.</li>
+                <li>{t('terms.section6.item1')}</li>
+                <li>{t('terms.section6.item2')}</li>
+                <li>{t('terms.section6.item3')}</li>
+                <li>{t('terms.section6.item4')}</li>
               </ul>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">7. Conteúdo e Propriedade Intelectual</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section7.title')}</h2>
               <p>
-                Todo o conteúdo disponibilizado através do Cardápio Fácil, incluindo textos, gráficos, logotipos, ícones, imagens, receitas, cardápios e software, é propriedade do Cardápio Fácil ou de seus fornecedores de conteúdo e está protegido por leis de direitos autorais.
+                {t('terms.section7.content1')}
               </p>
               <p className="mt-2">
-                Você pode usar o conteúdo apenas para seu uso pessoal e não comercial. Qualquer outro uso, incluindo reprodução, modificação, distribuição, transmissão ou republicação, sem o consentimento prévio por escrito do Cardápio Fácil, é estritamente proibido.
+                {t('terms.section7.content2')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">8. Isenção de Responsabilidade</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section8.title')}</h2>
               <p>
-                As informações nutricionais e receitas fornecidas pelo Cardápio Fácil são apenas para fins informativos e não substituem aconselhamento médico profissional, diagnóstico ou tratamento. Sempre consulte um profissional de saúde qualificado antes de fazer alterações significativas em sua dieta, especialmente se você tiver condições médicas preexistentes.
+                {t('terms.section8.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">9. Limitação de Responsabilidade</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section9.title')}</h2>
               <p>
-                Em nenhuma circunstância o Cardápio Fácil, seus diretores, funcionários, parceiros ou agentes serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos decorrentes do uso ou incapacidade de usar o serviço.
+                {t('terms.section9.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">10. Modificações do Serviço e dos Termos</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section10.title')}</h2>
               <p>
-                Reservamo-nos o direito de modificar ou descontinuar, temporária ou permanentemente, o serviço (ou qualquer parte dele) a qualquer momento, com ou sem aviso prévio. Também podemos revisar estes Termos de Uso a qualquer momento, a nosso critério. Ao continuar a usar o serviço após tais alterações, você concorda em estar vinculado aos termos revisados.
+                {t('terms.section10.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">11. Lei Aplicável</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section11.title')}</h2>
               <p>
-                Estes Termos serão regidos e interpretados de acordo com as leis do Brasil, sem considerar suas disposições de conflito de leis.
+                {t('terms.section11.content')}
               </p>
             </section>
             
             <section className="mb-8">
-              <h2 className="text-2xl font-semibold mb-4">12. Contato</h2>
+              <h2 className="text-2xl font-semibold mb-4">{t('terms.section12.title')}</h2>
               <p>
-                Se você tiver alguma dúvida sobre estes Termos, entre em contato conosco pelo e-mail: contato@cardapiofacil.online
+                {t('terms.section12.content')}
               </p>
             </section>
           </div>
