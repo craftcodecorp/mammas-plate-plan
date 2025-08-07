@@ -89,6 +89,6 @@
 - [✅] Update NotFound page to use translation keys
 - [✅] Review and update existing translation keys for accuracy
 - [✅] Add missing translation keys to language-utils.ts
-- [ ] Test language switching functionality
-- [ ] Verify all text changes when switching between languages
-- [ ] Create pull request to merge into develop branch
+- [✅] Test language switching functionality
+- [✅] Verify all text changes when switching between languages
+- [✅] Create pull request to merge into develop branch
