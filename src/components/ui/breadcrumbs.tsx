@@ -28,7 +28,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   className,
   showHomeIcon = true,
   separator,
-  baseUrl = 'https://mammas-plate-plan.netlify.app',
+  baseUrl = 'https://cardapiofacil.online',
 }) => {
   const location = useLocation();
   const { language, t } = useLanguage();

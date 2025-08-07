@@ -9,8 +9,8 @@ const NotFound = () => {
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
-    ? 'https://mammas-plate-plan.netlify.app' 
-    : 'https://mammas-plate-plan.netlify.app/en';
+    ? 'https://cardapiofacil.online' 
+    : 'https://cardapiofacil.online/en';
     
   useEffect(() => {
     console.error(

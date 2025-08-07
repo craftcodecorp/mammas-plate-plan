@@ -38,8 +38,8 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   
   // Base URL for canonical links and structured data
   const baseUrl = language === 'pt-BR' 
-    ? 'https://mammas-plate-plan.netlify.app' 
-    : 'https://mammas-plate-plan.netlify.app/en';
+    ? 'https://cardapiofacil.online' 
+    : 'https://cardapiofacil.online/en';
     
   // Generate canonical URL
   const canonical = `${baseUrl}${location.pathname}`;
@@ -57,12 +57,12 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             // Add hreflang tags for multi-language support
             {
               rel: 'alternate',
-              href: `https://mammas-plate-plan.netlify.app${location.pathname}`,
+              href: `https://cardapiofacil.online${location.pathname}`,
               hrefLang: 'pt-BR'
             },
             {
               rel: 'alternate',
-              href: `https://mammas-plate-plan.netlify.app/en${location.pathname}`,
+              href: `https://cardapiofacil.online/en${location.pathname}`,
               hrefLang: 'en'
             }
           ]}

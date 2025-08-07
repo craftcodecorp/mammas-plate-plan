@@ -25,20 +25,20 @@ const App = () => (
     <SEOHead
       title="Mamma's Plate Plan - Planejamento de refeições saudáveis"
       description="Planejamento de refeições saudáveis e deliciosas para toda a família"
-      canonical="https://mammas-plate-plan.netlify.app"
+      canonical="https://cardapiofacil.online"
       openGraph={{
         title: "Mamma's Plate Plan - Planejamento de refeições saudáveis",
         description: "Planejamento de refeições saudáveis e deliciosas para toda a família",
         type: "website",
-        url: "https://mammas-plate-plan.netlify.app",
-        image: "https://mammas-plate-plan.netlify.app/og-image.jpg",
+        url: "https://cardapiofacil.online",
+        image: "https://cardapiofacil.online/og-image.jpg",
         siteName: "Mamma's Plate Plan"
       }}
       twitter={{
         card: "summary_large_image",
-        site: "@mammasplateplan",
-        creator: "@mammasplateplan",
-        image: "https://mammas-plate-plan.netlify.app/twitter-image.jpg"
+        site: "@cardapiofacil",
+        creator: "@cardapiofacil",
+        image: "https://cardapiofacil.online/twitter-image.jpg"
       }}
       additionalMetaTags={[
         { name: "viewport", content: "width=device-width, initial-scale=1" },

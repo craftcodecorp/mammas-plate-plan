@@ -18,8 +18,8 @@ const Index = () => {
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
-    ? 'https://mammas-plate-plan.netlify.app' 
-    : 'https://mammas-plate-plan.netlify.app/en';
+    ? 'https://cardapiofacil.online' 
+    : 'https://cardapiofacil.online/en';
     
   // Generate canonical URL
   const canonical = `${baseUrl}${location.pathname}`;
@@ -42,8 +42,8 @@ const Index = () => {
         },
         twitter: {
           card: 'summary_large_image',
-          site: '@mammasplateplan',
-          creator: '@mammasplateplan',
+          site: '@cardapiofacil',
+          creator: '@cardapiofacil',
           image: `${baseUrl}/twitter-image.jpg`
         },
         additionalMetaTags: [

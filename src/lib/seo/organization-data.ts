@@ -11,13 +11,13 @@ import { generateOrganizationStructuredData } from './seo-utils';
  */
 export const organizationData = {
   name: "Mamma's Plate Plan",
-  url: "https://mammas-plate-plan.netlify.app",
-  logo: "https://mammas-plate-plan.netlify.app/logo.png",
+  url: "https://cardapiofacil.online",
+  logo: "https://cardapiofacil.online/logo.png",
   description: "Planejamento de refeições saudáveis e deliciosas para toda a família",
   sameAs: [
-    "https://facebook.com/mammasplateplan",
-    "https://instagram.com/mammasplateplan",
-    "https://twitter.com/mammasplateplan"
+    "https://facebook.com/cardapiofacil",
+    "https://instagram.com/cardapiofacil",
+    "https://twitter.com/cardapiofacil"
   ],
   contactPoint: {
     '@type': 'ContactPoint',

@@ -10,8 +10,8 @@ const PrivacyPolicy = () => {
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
-    ? 'https://mammas-plate-plan.netlify.app' 
-    : 'https://mammas-plate-plan.netlify.app/en';
+    ? 'https://cardapiofacil.online' 
+    : 'https://cardapiofacil.online/en';
     
   // Generate canonical URL
   const canonical = `${baseUrl}${location.pathname}`;
