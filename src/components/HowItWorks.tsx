@@ -1,37 +1,46 @@
 import { UserPlus, MessageCircle, Calendar } from "lucide-react";
+import { useLanguage } from "@/lib/use-language";
 
-const steps = [
+// Define step icons in order they'll be used
+const stepIcons = [UserPlus, MessageCircle, Calendar];
+
+// Create steps array dynamically using translation keys
+const createSteps = (t: (key: string) => string) => [
   {
-    icon: UserPlus,
+    icon: stepIcons[0],
     step: "1",
-    title: "Crie seu perfil",
-    description: "Conte sobre sua família, idades das crianças, restrições alimentares e preferências."
+    title: t('how.component.step1.title'),
+    description: t('how.component.step1.description')
   },
   {
-    icon: MessageCircle,
+    icon: stepIcons[1],
     step: "2", 
-    title: "Receba no WhatsApp",
-    description: "Toda segunda-feira receba seu cardápio da semana e lista de compras organizada."
+    title: t('how.component.step2.title'),
+    description: t('how.component.step2.description')
   },
   {
-    icon: Calendar,
+    icon: stepIcons[2],
     step: "3",
-    title: "Cozinhe e aproveite",
-    description: "Siga o planejamento e tenha mais tempo para curtir momentos em família."
+    title: t('how.component.step3.title'),
+    description: t('how.component.step3.description')
   }
 ];
 
 const HowItWorks = () => {
+  const { t } = useLanguage();
+  
+  // Generate steps using the translation function
+  const steps = createSteps(t);
+  
   return (
     <section id="how-it-works" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Como funciona?
+            {t('how.component.heading')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Em apenas 3 passos simples, você terá um planejamento completo 
-            de refeições para toda a semana.
+            {t('how.component.subheading')}
           </p>
         </div>
 
