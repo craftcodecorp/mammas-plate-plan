@@ -66,6 +66,22 @@ export const translations: Record<Language, Record<string, string>> = {
     'features.supportive.title': 'Suporte',
     'features.supportive.description': 'Atendimento personalizado para ajustar seu cardápio quando necessário.',
     
+    // Features component
+    'features.component.heading': 'Tudo que você precisa',
+    'features.component.subheading': 'Simplificamos o planejamento das refeições para mães ocupadas, pessoas com restrições alimentares e profissionais com rotina corrida.',
+    'features.component.card1.title': 'Cardápio Personalizado',
+    'features.component.card1.description': 'Refeições planejadas com base no perfil da sua família, idade das crianças e preferências alimentares.',
+    'features.component.card2.title': 'Lista de Compras Organizada',
+    'features.component.card2.description': 'Ingredientes organizados por categoria com checkboxes para uma compra mais eficiente.',
+    'features.component.card3.title': 'Culinária Brasileira',
+    'features.component.card3.description': 'Pratos que fazem parte da nossa cultura, com ingredientes sazonais e de fácil acesso.',
+    'features.component.card4.title': 'Nutrição Balanceada',
+    'features.component.card4.description': 'Refeições equilibradas para famílias, pessoas com restrições alimentares e profissionais ocupados.',
+    'features.component.card5.title': 'Praticidade Total',
+    'features.component.card5.description': 'Sem aplicativo, sem login, sem complicação. Tudo direto no seu WhatsApp.',
+    'features.component.card6.title': 'Para Todos os Perfis',
+    'features.component.card6.description': 'Famílias com bebês, pessoas com restrições alimentares e profissionais com pouco tempo para cozinhar.',
+    
     // How it works section
     'how.title': 'Como Funciona',
     'how.subtitle': 'Três passos simples para transformar sua rotina alimentar',
@@ -184,6 +200,22 @@ export const translations: Record<Language, Record<string, string>> = {
     'features.adaptable.description': 'Recipes that adapt to your family\'s routine, with quick options for busy days.',
     'features.supportive.title': 'Support',
     'features.supportive.description': 'Personalized assistance to adjust your meal plan when needed.',
+    
+    // Features component
+    'features.component.heading': 'Everything you need',
+    'features.component.subheading': 'We simplify meal planning for busy mothers, people with dietary restrictions, and professionals with hectic routines.',
+    'features.component.card1.title': 'Personalized Meal Plan',
+    'features.component.card1.description': 'Meals planned based on your family profile, children\'s ages, and food preferences.',
+    'features.component.card2.title': 'Organized Shopping List',
+    'features.component.card2.description': 'Ingredients organized by category with checkboxes for more efficient shopping.',
+    'features.component.card3.title': 'Brazilian Cuisine',
+    'features.component.card3.description': 'Dishes that are part of our culture, with seasonal and easily accessible ingredients.',
+    'features.component.card4.title': 'Balanced Nutrition',
+    'features.component.card4.description': 'Balanced meals for families, people with dietary restrictions, and busy professionals.',
+    'features.component.card5.title': 'Total Convenience',
+    'features.component.card5.description': 'No app, no login, no complications. Everything directly on your WhatsApp.',
+    'features.component.card6.title': 'For All Profiles',
+    'features.component.card6.description': 'Families with babies, people with dietary restrictions, and professionals with little time to cook.',
     
     // How it works section
     'how.title': 'How It Works',
