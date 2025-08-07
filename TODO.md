@@ -86,7 +86,7 @@
 - [✅] Update ThankYou page to use translation keys
 - [✅] Update TermsOfUse page to use translation keys
 - [✅] Update PrivacyPolicy page to use translation keys
-- [ ] Update NotFound page to use translation keys
+- [✅] Update NotFound page to use translation keys
 - [ ] Review and update existing translation keys for accuracy
 - [ ] Add missing translation keys to language-utils.ts
 - [ ] Test language switching functionality
