@@ -1,18 +1,45 @@
-import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageLayout from "@/components/layout/page-layout";
+import { useLocation } from "react-router-dom";
+import { useLanguage } from "@/lib/use-language";
 
 const PrivacyPolicy = () => {
+  const location = useLocation();
+  const { language } = useLanguage();
+  
+  // Base URL for canonical links
+  const baseUrl = language === 'pt-BR' 
+    ? 'https://mammas-plate-plan.netlify.app' 
+    : 'https://mammas-plate-plan.netlify.app/en';
+    
+  // Generate canonical URL
+  const canonical = `${baseUrl}${location.pathname}`;
+  
   return (
-    <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Política de Privacidade | Cardápio Fácil</title>
-        <meta name="description" content="Política de privacidade do serviço Cardápio Fácil" />
-      </Helmet>
-      
-      <Header />
-      
-      <main className="container mx-auto px-4 py-12">
+    <PageLayout
+      showBreadcrumbs={true}
+      seo={{
+        title: "Política de Privacidade | Mamma's Plate Plan",
+        description: "Política de privacidade do serviço Mamma's Plate Plan. Saiba como protegemos seus dados e informações pessoais.",
+        canonical,
+        openGraph: {
+          title: "Política de Privacidade | Mamma's Plate Plan",
+          description: "Política de privacidade do serviço Mamma's Plate Plan. Saiba como protegemos seus dados e informações pessoais.",
+          type: 'website',
+          url: canonical,
+          image: `${baseUrl}/og-image.jpg`,
+          siteName: "Mamma's Plate Plan"
+        },
+        additionalMetaTags: [
+          { name: 'keywords', content: 'política de privacidade, lgpd, proteção de dados, cardápio fácil, termos de uso' }
+        ]
+      }}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        
+        <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-8">Política de Privacidade</h1>
           
@@ -196,6 +223,7 @@ const PrivacyPolicy = () => {
       
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 

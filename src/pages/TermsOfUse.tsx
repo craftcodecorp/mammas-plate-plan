@@ -1,18 +1,45 @@
-import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageLayout from "@/components/layout/page-layout";
+import { useLocation } from "react-router-dom";
+import { useLanguage } from "@/lib/use-language";
 
 const TermsOfUse = () => {
+  const location = useLocation();
+  const { language } = useLanguage();
+  
+  // Base URL for canonical links
+  const baseUrl = language === 'pt-BR' 
+    ? 'https://mammas-plate-plan.netlify.app' 
+    : 'https://mammas-plate-plan.netlify.app/en';
+    
+  // Generate canonical URL
+  const canonical = `${baseUrl}${location.pathname}`;
+  
   return (
-    <div className="min-h-screen bg-background">
-      <Helmet>
-        <title>Termos de Uso | Cardápio Fácil</title>
-        <meta name="description" content="Termos de uso do serviço Cardápio Fácil" />
-      </Helmet>
-      
-      <Header />
-      
-      <main className="container mx-auto px-4 py-12">
+    <PageLayout
+      showBreadcrumbs={true}
+      seo={{
+        title: "Termos de Uso | Mamma's Plate Plan",
+        description: "Termos e condições de uso do serviço Mamma's Plate Plan. Leia atentamente antes de utilizar nossos serviços.",
+        canonical,
+        openGraph: {
+          title: "Termos de Uso | Mamma's Plate Plan",
+          description: "Termos e condições de uso do serviço Mamma's Plate Plan. Leia atentamente antes de utilizar nossos serviços.",
+          type: 'website',
+          url: canonical,
+          image: `${baseUrl}/og-image.jpg`,
+          siteName: "Mamma's Plate Plan"
+        },
+        additionalMetaTags: [
+          { name: 'keywords', content: 'termos de uso, condições de serviço, contrato, cardápio fácil, termos legais' }
+        ]
+      }}
+    >
+      <div className="min-h-screen bg-background">
+        <Header />
+        
+        <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-8">Termos de Uso</h1>
           
@@ -127,6 +154,7 @@ const TermsOfUse = () => {
       
       <Footer />
     </div>
+    </PageLayout>
   );
 };
 

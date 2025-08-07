@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/lib/use-language';
-import Breadcrumbs from '@/components/ui/breadcrumbs';
-import { generateBreadcrumbs } from '@/lib/seo/breadcrumb-utils';
+import { Breadcrumbs } from '../ui/breadcrumbs';
+import SEOHead from '@/components/seo/seo-head';
+import { SEOMetadata } from '@/lib/seo/seo-utils';
 import { cn } from '@/lib/utils';
 
 interface PageLayoutProps {
@@ -11,6 +12,8 @@ interface PageLayoutProps {
   className?: string;
   containerClassName?: string;
   breadcrumbsClassName?: string;
+  seo?: SEOMetadata;
+  structuredData?: string;
 }
 
 /**
@@ -25,23 +28,50 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   className,
   containerClassName,
   breadcrumbsClassName,
+  seo,
+  structuredData,
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
   
-  // Generate breadcrumbs based on current path
-  const breadcrumbs = generateBreadcrumbs(location.pathname, language);
+  // Base URL for canonical links and structured data
+  const baseUrl = language === 'pt-BR' 
+    ? 'https://mammas-plate-plan.netlify.app' 
+    : 'https://mammas-plate-plan.netlify.app/en';
+    
+  // Generate canonical URL
+  const canonical = `${baseUrl}${location.pathname}`;
 
   return (
     <div className={cn('min-h-screen flex flex-col', className)}>
+      {/* SEO Head with metadata */}
+      {seo && (
+        <SEOHead
+          {...seo}
+          canonical={seo.canonical || canonical}
+          structuredData={structuredData}
+          additionalLinkTags={[
+            ...(seo.additionalLinkTags || []),
+            // Add hreflang tags for multi-language support
+            {
+              rel: 'alternate',
+              href: `https://mammas-plate-plan.netlify.app${location.pathname}`,
+              hrefLang: 'pt-BR'
+            },
+            {
+              rel: 'alternate',
+              href: `https://mammas-plate-plan.netlify.app/en${location.pathname}`,
+              hrefLang: 'en'
+            }
+          ]}
+        />
+      )}
+      
       {showBreadcrumbs && (
         <div className={cn('container mx-auto px-4 py-4', breadcrumbsClassName)}>
           <Breadcrumbs 
-            items={breadcrumbs} 
             className="text-sm"
-            baseUrl={language === 'pt-BR' 
-              ? 'https://mammas-plate-plan.netlify.app' 
-              : 'https://mammas-plate-plan.netlify.app/en'}
+            baseUrl={baseUrl}
           />
         </div>
       )}

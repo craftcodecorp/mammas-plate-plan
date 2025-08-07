@@ -2,11 +2,22 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, Calendar, MessageCircle } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import PageLayout from "@/components/layout/page-layout";
+import { useLanguage } from "@/lib/use-language";
 
 const ThankYou = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { language } = useLanguage();
   const formData = location.state?.formData || {};
+  
+  // Base URL for canonical links
+  const baseUrl = language === 'pt-BR' 
+    ? 'https://mammas-plate-plan.netlify.app' 
+    : 'https://mammas-plate-plan.netlify.app/en';
+    
+  // Generate canonical URL
+  const canonical = `${baseUrl}${location.pathname}`;
 
   // Redirect to home if accessed directly without form data
   useEffect(() => {
@@ -16,6 +27,25 @@ const ThankYou = () => {
   }, [location.state, navigate]);
 
   return (
+    <PageLayout
+      showBreadcrumbs={false}
+      seo={{
+        title: "Obrigado pelo seu cadastro | Mamma's Plate Plan",
+        description: "Seu cadastro foi recebido com sucesso. Estamos preparando seu cardápio personalizado.",
+        canonical,
+        openGraph: {
+          title: "Obrigado pelo seu cadastro | Mamma's Plate Plan",
+          description: "Seu cadastro foi recebido com sucesso. Estamos preparando seu cardápio personalizado.",
+          type: 'website',
+          url: canonical,
+          image: `${baseUrl}/og-image.jpg`,
+          siteName: "Mamma's Plate Plan"
+        },
+        additionalMetaTags: [
+          { name: 'robots', content: 'noindex, follow' }
+        ]
+      }}
+    >
     <div className="min-h-screen bg-gradient-subtle flex items-center justify-center p-4">
       <div className="max-w-2xl w-full bg-white rounded-2xl shadow-strong p-8 md:p-12">
         <div className="text-center mb-8">
@@ -106,6 +136,7 @@ const ThankYou = () => {
         </div>
       </div>
     </div>
+    </PageLayout>
   );
 };
 

@@ -34,6 +34,7 @@ export interface SEOMetadata {
     href: string;
     sizes?: string;
     type?: string;
+    hrefLang?: string;
   }>;
 }
 
@@ -145,6 +146,29 @@ export const generateSitemap = (urls: Array<{
   sitemap += '</urlset>';
   
   return sitemap;
+};
+
+/**
+ * Generate hreflang tags for multi-language support
+ * @param path - Current path
+ * @param languages - Array of language codes
+ * @param baseUrl - Base URL without language prefix
+ * @returns Array of link tags
+ */
+export const generateHreflangTags = (
+  path: string,
+  languages: string[],
+  baseUrl: string
+): Array<{
+  rel: string;
+  href: string;
+  hrefLang: string;
+}> => {
+  return languages.map(lang => ({
+    rel: 'alternate',
+    href: `${baseUrl}${lang === 'pt-BR' ? '' : `/${lang.toLowerCase()}`}${path}`,
+    hrefLang: lang,
+  }));
 };
 
 /**

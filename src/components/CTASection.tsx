@@ -308,7 +308,7 @@ const CTASection = () => {
                     htmlFor="terms"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    Aceito os <a href="#" className="text-primary underline">termos de uso</a>
+                    Aceito os <a href="/terms-of-use" className="text-primary underline">termos de uso</a>
                   </label>
                 </div>
                 {errors.acceptedTerms && (
@@ -329,7 +329,7 @@ const CTASection = () => {
                     htmlFor="privacy"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    Aceito a <a href="#" className="text-primary underline">política de privacidade</a>
+                    Aceito a <a href="/privacy-policy" className="text-primary underline">política de privacidade</a>
                   </label>
                 </div>
                 {errors.acceptedPrivacyPolicy && (
