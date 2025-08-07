@@ -82,6 +82,13 @@ export const translations: Record<Language, Record<string, string>> = {
     'features.component.card6.title': 'Para Todos os Perfis',
     'features.component.card6.description': 'Famílias com bebês, pessoas com restrições alimentares e profissionais com pouco tempo para cozinhar.',
     
+    // Blog section
+    'blog.title': 'Blog e Receitas',
+    'blog.subtitle': 'Dicas, cardápios e receitas para inspirar sua rotina alimentar',
+    'blog.servings': 'porções',
+    'blog.readMore': 'Ler mais',
+    'blog.viewMore': 'Ver mais artigos',
+    
     // How it works section
     'how.title': 'Como Funciona',
     'how.subtitle': 'Três passos simples para transformar sua rotina alimentar',
@@ -320,6 +327,13 @@ export const translations: Record<Language, Record<string, string>> = {
     'features.component.card5.description': 'No app, no login, no complications. Everything directly on your WhatsApp.',
     'features.component.card6.title': 'For All Profiles',
     'features.component.card6.description': 'Families with babies, people with dietary restrictions, and professionals with little time to cook.',
+    
+    // Blog section
+    'blog.title': 'Blog & Recipes',
+    'blog.subtitle': 'Tips, meal plans and recipes to inspire your meal routine',
+    'blog.servings': 'servings',
+    'blog.readMore': 'Read more',
+    'blog.viewMore': 'View more articles',
     
     // How it works section
     'how.title': 'How It Works',
