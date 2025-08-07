@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CalendarIcon, Clock, ChefHat, Users } from "lucide-react";
+import { CalendarIcon, Clock, ChefHat, Users, ArrowRight } from "lucide-react";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-elements";
 import OptimizedImage from "@/components/ui/optimized-image";
 import { useLanguage } from "@/lib/use-language";
@@ -105,12 +105,10 @@ const Blog = () => {
       <div className="container mx-auto px-4">
         <FadeInUp className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            {language === 'pt-BR' ? 'Blog e Receitas' : 'Blog & Recipes'}
+            {t('blog.title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {language === 'pt-BR' 
-              ? 'Dicas, cardápios e receitas para inspirar sua rotina alimentar' 
-              : 'Tips, meal plans and recipes to inspire your meal routine'}
+            {t('blog.subtitle')}
           </p>
         </FadeInUp>
 
@@ -147,7 +145,7 @@ const Blog = () => {
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center">
                       <Users className="mr-1 h-4 w-4" />
-                      <span>{post.servings} {language === 'pt-BR' ? 'porções' : 'servings'}</span>
+                      <span>{post.servings} {t('blog.servings')}</span>
                     </div>
                     <div className="flex items-center">
                       <ChefHat className="mr-1 h-4 w-4" />
@@ -157,8 +155,8 @@ const Blog = () => {
                 </CardContent>
                 
                 <CardFooter>
-                  <Button variant="outline" className="w-full">
-                    {language === 'pt-BR' ? 'Ler mais' : 'Read more'}
+                  <Button variant="link" className="text-primary p-0 h-auto font-medium">
+                    {t('blog.readMore')} <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 </CardFooter>
               </Card>
@@ -168,7 +166,7 @@ const Blog = () => {
         
         <div className="mt-12 text-center">
           <Button variant="outline" size="lg">
-            {language === 'pt-BR' ? 'Ver mais artigos' : 'View more articles'}
+            {t('blog.viewMore')}
           </Button>
         </div>
       </div>
