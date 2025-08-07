@@ -1,52 +1,61 @@
 import { Calendar, ShoppingCart, Utensils, Heart, Clock, Users } from "lucide-react";
 import { FadeInUp, StaggerContainer, StaggerItem, ScaleIn } from "@/components/ui/animated-elements";
+import { useLanguage } from "@/lib/use-language";
 
-const features = [
+// Define feature icons in order they'll be used
+const featureIcons = [Calendar, ShoppingCart, Utensils, Heart, Clock, Users];
+
+// Create features array dynamically using translation keys
+const createFeatures = (t: (key: string) => string) => [
   {
-    icon: Calendar,
-    title: "Cardápio Personalizado",
-    description: "Refeições planejadas com base no perfil da sua família, idade das crianças e preferências alimentares."
+    icon: featureIcons[0],
+    title: t('features.component.card1.title'),
+    description: t('features.component.card1.description')
   },
   {
-    icon: ShoppingCart,
-    title: "Lista de Compras Organizada",
-    description: "Ingredientes organizados por categoria com checkboxes para uma compra mais eficiente."
+    icon: featureIcons[1],
+    title: t('features.component.card2.title'),
+    description: t('features.component.card2.description')
   },
   {
-    icon: Utensils,
-    title: "Culinária Brasileira",
-    description: "Pratos que fazem parte da nossa cultura, com ingredientes sazonais e de fácil acesso."
+    icon: featureIcons[2],
+    title: t('features.component.card3.title'),
+    description: t('features.component.card3.description')
   },
   {
-    icon: Heart,
-    title: "Nutrição Balanceada",
-    description: "Refeições equilibradas para famílias, pessoas com restrições alimentares e profissionais ocupados."
+    icon: featureIcons[3],
+    title: t('features.component.card4.title'),
+    description: t('features.component.card4.description')
   },
   {
-    icon: Clock,
-    title: "Praticidade Total",
-    description: "Sem aplicativo, sem login, sem complicação. Tudo direto no seu WhatsApp."
+    icon: featureIcons[4],
+    title: t('features.component.card5.title'),
+    description: t('features.component.card5.description')
   },
   {
-    icon: Users,
-    title: "Para Todos os Perfis",
-    description: "Famílias com bebês, pessoas com restrições alimentares e profissionais com pouco tempo para cozinhar."
+    icon: featureIcons[5],
+    title: t('features.component.card6.title'),
+    description: t('features.component.card6.description')
   }
 ];
 
 const Features = () => {
+  const { t } = useLanguage();
+  
+  // Generate features using the translation function
+  const features = createFeatures(t);
+  
   return (
     <section className="py-20 bg-gradient-subtle" id="features">
       <div className="container mx-auto px-4">
         <FadeInUp className="text-center mb-16">
           <ScaleIn>
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Tudo que você precisa
+              {t('features.component.heading')}
             </h2>
           </ScaleIn>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Simplificamos o planejamento das refeições para mães ocupadas, pessoas com 
-            restrições alimentares e profissionais com rotina corrida.
+            {t('features.component.subheading')}
           </p>
         </FadeInUp>
 
