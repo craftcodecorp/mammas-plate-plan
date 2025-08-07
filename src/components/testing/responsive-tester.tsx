@@ -39,11 +39,6 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
   // Check if we're in development mode
   const isDevelopment = import.meta.env.MODE === 'development';
   
-  // Don't render in production if onlyInDevelopment is true
-  if (onlyInDevelopment && !isDevelopment) {
-    return null; // Don't render anything in production
-  }
-  
   // Get browser information and viewport size on mount
   useEffect(() => {
     const getInfo = async () => {
@@ -118,6 +113,11 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
     document.body.style.setProperty('--test-width', `${currentSize.height}px`);
     document.body.style.setProperty('--test-height', `${currentSize.width}px`);
   };
+  
+  // Don't render in production if onlyInDevelopment is true
+  if (onlyInDevelopment && !isDevelopment) {
+    return null; // Don't render anything in production
+  }
   
   return (
     <div className="fixed bottom-4 right-4 z-50">
