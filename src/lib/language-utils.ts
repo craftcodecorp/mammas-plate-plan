@@ -144,6 +144,27 @@ export const translations: Record<Language, Record<string, string>> = {
     'pricing.component.disclaimer': 'Sem compromisso • Sem fidelidade • Cancele quando quiser',
     'pricing.component.customization': '💡 <strong>Personalizações extras:</strong> Planos especiais disponíveis para famílias com necessidades específicas (vegano, sem glúten, diabético, etc.)',
     
+    // Testimonials component
+    'testimonials.component.heading': 'O que nossos usuários estão falando',
+    'testimonials.component.subheading': 'Famílias, pessoas com restrições alimentares e profissionais ocupados já transformaram sua rotina.',
+    'testimonials.component.rating.text': 'Baseado em 127 avaliações',
+    'testimonials.component.testimonial1.name': 'Maria Silva',
+    'testimonials.component.testimonial1.role': 'Mãe de 2 filhos',
+    'testimonials.component.testimonial1.content': 'Minha vida mudou! Não preciso mais ficar estressada pensando no que fazer para o almoço. As receitas são deliciosas e os ingredientes sempre frescos.',
+    'testimonials.component.testimonial1.avatar': '👩‍🍳',
+    'testimonials.component.testimonial2.name': 'Ana Costa',
+    'testimonials.component.testimonial2.role': 'Mãe de bebê de 8 meses',
+    'testimonials.component.testimonial2.content': 'Perfeito para quem está introduzindo alimentação sólida. As sugestões são nutritivas e adequadas para a idade do meu filho.',
+    'testimonials.component.testimonial2.avatar': '👶',
+    'testimonials.component.testimonial3.name': 'Carlos Mendes',
+    'testimonials.component.testimonial3.role': 'Executivo, intolerante à lactose',
+    'testimonials.component.testimonial3.content': 'Finalmente encontrei um serviço que entende minhas restrições alimentares. Recebo receitas deliciosas sem lactose toda semana.',
+    'testimonials.component.testimonial3.avatar': '👨‍💼',
+    'testimonials.component.testimonial4.name': 'Rafael & Juliana',
+    'testimonials.component.testimonial4.role': 'Casal profissional',
+    'testimonials.component.testimonial4.content': 'Economizamos tempo e dinheiro. A lista de compras é super organizada e não desperdiçamos mais comida. Perfeito para nossa rotina corrida!',
+    'testimonials.component.testimonial4.avatar': '👫',
+    
     // FAQ section
     'faq.title': 'Perguntas Frequentes',
     'faq.subtitle': 'Tire suas dúvidas sobre o Cardápio Fácil e como podemos ajudar sua família',
@@ -308,9 +329,30 @@ export const translations: Record<Language, Record<string, string>> = {
     'pricing.component.disclaimer': 'No commitment • No loyalty period • Cancel whenever you want',
     'pricing.component.customization': '💡 <strong>Extra customizations:</strong> Special plans available for families with specific needs (vegan, gluten-free, diabetic, etc.)',
     
+    // Testimonials component
+    'testimonials.component.heading': 'What our users are saying',
+    'testimonials.component.subheading': 'Families, people with dietary restrictions, and busy professionals have already transformed their routine.',
+    'testimonials.component.rating.text': 'Based on 127 reviews',
+    'testimonials.component.testimonial1.name': 'Mary Smith',
+    'testimonials.component.testimonial1.role': 'Mother of 2 children',
+    'testimonials.component.testimonial1.content': 'My life has changed! I no longer need to stress about what to make for lunch. The recipes are delicious and the ingredients always fresh.',
+    'testimonials.component.testimonial1.avatar': '👩‍🍳',
+    'testimonials.component.testimonial2.name': 'Anna Costa',
+    'testimonials.component.testimonial2.role': 'Mother of an 8-month-old baby',
+    'testimonials.component.testimonial2.content': 'Perfect for those introducing solid foods. The suggestions are nutritious and appropriate for my son\'s age.',
+    'testimonials.component.testimonial2.avatar': '👶',
+    'testimonials.component.testimonial3.name': 'Charles Miller',
+    'testimonials.component.testimonial3.role': 'Executive, lactose intolerant',
+    'testimonials.component.testimonial3.content': 'I finally found a service that understands my dietary restrictions. I receive delicious lactose-free recipes every week.',
+    'testimonials.component.testimonial3.avatar': '👨‍💼',
+    'testimonials.component.testimonial4.name': 'Robert & Julia',
+    'testimonials.component.testimonial4.role': 'Professional couple',
+    'testimonials.component.testimonial4.content': 'We save time and money. The shopping list is super organized and we no longer waste food. Perfect for our busy routine!',
+    'testimonials.component.testimonial4.avatar': '👫',
+    
     // FAQ section
     'faq.title': 'Frequently Asked Questions',
-    'faq.subtitle': 'Get answers about Easy Meal Plan and how we can help your family',
+    'faq.subtitle': 'Get answers to common questions about Mamma\'s Plate Plan and how we can help your family',
     
     // CTA section
     'cta.title': 'Ready to simplify your meal routine?',
