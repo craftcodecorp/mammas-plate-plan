@@ -6,72 +6,86 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import OptimizedImage from "@/components/ui/optimized-image";
 import { heroImages, placeholders, generateColorPlaceholder, ResponsiveImageSet } from "@/lib/image-utils";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/lib/use-language";
 
-const carouselSlides = [
+// Define slide icons for features
+const slideFeatureIcons = [
+  [Baby, Users, Clock, ShoppingCart], // Slide 1 icons
+  [Heart, Users, Clock, ShoppingCart], // Slide 2 icons
+  [Briefcase, Users, Clock, ShoppingCart] // Slide 3 icons
+];
+
+// Create carousel slides dynamically using translation keys
+const createCarouselSlides = (t: (key: string) => string) => [
   {
-    title: "Planejamento de",
-    subtitle: "Refeições para Mães",
-    tagline: "Introdução alimentar e receitas práticas",
-    description: "Receba cardápios especiais para bebês iniciando sólidos e receitas práticas para toda a família, sem complicação.",
+    title: t('hero.slide1.title'),
+    subtitle: t('hero.slide1.subtitle'),
+    tagline: t('hero.slide1.tagline'),
+    description: t('hero.slide1.description'),
     image: heroImages.mothers,
     placeholder: placeholders.mothers,
-    alt: "Mãe preparando refeição saudável para bebê",
+    alt: t('hero.slide1.alt'),
     features: [
-      { icon: Baby, text: "Introdução alimentar" },
-      { icon: Users, text: "Para toda família" },
-      { icon: Clock, text: "Receitas rápidas" },
-      { icon: ShoppingCart, text: "Lista organizada" }
+      { icon: slideFeatureIcons[0][0], text: t('hero.slide1.feature1') },
+      { icon: slideFeatureIcons[0][1], text: t('hero.slide1.feature2') },
+      { icon: slideFeatureIcons[0][2], text: t('hero.slide1.feature3') },
+      { icon: slideFeatureIcons[0][3], text: t('hero.slide1.feature4') }
     ]
   },
   {
-    title: "Planejamento de",
-    subtitle: "Refeições Especiais",
-    tagline: "Respeitando suas restrições alimentares",
-    description: "Cardápios personalizados para vegetarianos, intolerantes à lactose, celíacos e outras necessidades específicas.",
+    title: t('hero.slide2.title'),
+    subtitle: t('hero.slide2.subtitle'),
+    tagline: t('hero.slide2.tagline'),
+    description: t('hero.slide2.description'),
     image: heroImages.special,
     placeholder: placeholders.special,
-    alt: "Pessoa preparando refeição com alimentos para dietas especiais",
+    alt: t('hero.slide2.alt'),
     features: [
-      { icon: Heart, text: "Sem restrições" },
-      { icon: Users, text: "Nutrição balanceada" },
-      { icon: Clock, text: "Entrega semanal" },
-      { icon: ShoppingCart, text: "Ingredientes certos" }
+      { icon: slideFeatureIcons[1][0], text: t('hero.slide2.feature1') },
+      { icon: slideFeatureIcons[1][1], text: t('hero.slide2.feature2') },
+      { icon: slideFeatureIcons[1][2], text: t('hero.slide2.feature3') },
+      { icon: slideFeatureIcons[1][3], text: t('hero.slide2.feature4') }
     ]
   },
   {
-    title: "Planejamento de",
-    subtitle: "Refeições Práticas",
-    tagline: "Para profissionais ocupados",
-    description: "Cardápios otimizados para quem tem pouco tempo, mas não abre mão de uma alimentação saudável e saborosa.",
+    title: t('hero.slide3.title'),
+    subtitle: t('hero.slide3.subtitle'),
+    tagline: t('hero.slide3.tagline'),
+    description: t('hero.slide3.description'),
     image: heroImages.professionals,
     placeholder: placeholders.professionals,
-    alt: "Profissional ocupado preparando refeição rápida e saudável",
+    alt: t('hero.slide3.alt'),
     features: [
-      { icon: Briefcase, text: "Vida corrida" },
-      { icon: Users, text: "Casais e solteiros" },
-      { icon: Clock, text: "Preparo rápido" },
-      { icon: ShoppingCart, text: "Compra eficiente" }
+      { icon: slideFeatureIcons[2][0], text: t('hero.slide3.feature1') },
+      { icon: slideFeatureIcons[2][1], text: t('hero.slide3.feature2') },
+      { icon: slideFeatureIcons[2][2], text: t('hero.slide3.feature3') },
+      { icon: slideFeatureIcons[2][3], text: t('hero.slide3.feature4') }
     ]
   }
 ];
 
 const Hero = () => {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const { t } = useLanguage();
   const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
   
-  React.useEffect(() => {
-    if (!api) return;
-    
-    const handleSelect = () => {
-      setCurrentSlide(api.selectedScrollSnap());
-    };
-    
-    api.on("select", handleSelect);
-    return () => {
-      api.off("select", handleSelect);
-    };
+  // Generate carousel slides using the translation function
+  const carouselSlides = createCarouselSlides(t);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
   }, [api]);
-  
+
   return (
     <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
       {/* Background Pattern */}
@@ -128,11 +142,11 @@ const Hero = () => {
                           className="text-lg px-8 py-6 h-auto"
                           onClick={scrollToSignupForm}
                         >
-                          Comece seu teste de 7 dias grátis
+                          {t('hero.cta.trial')}
                         </Button>
                         
                         <p className="text-sm text-white/80">
-                          ✨ Sem compromisso • Cancele quando quiser
+                          {t('hero.cta.no_commitment')}
                         </p>
                       </div>
                     </div>
@@ -163,7 +177,7 @@ const Hero = () => {
                       onClick={scrollToSignupForm}
                     >
                       <MessageCircle className="w-4 h-4" />
-                      <span className="text-sm font-medium">Receba no WhatsApp</span>
+                      <span className="text-sm font-medium">{t('hero.whatsapp.badge')}</span>
                     </div>
                   </div>
                 </div>
