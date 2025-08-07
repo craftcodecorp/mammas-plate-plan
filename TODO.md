@@ -81,7 +81,7 @@
 - [✅] Update FAQ component to use translation keys
 - [✅] Update CTASection component to use translation keys
 - [✅] Update Blog component to use translation keys
-- [ ] Update Footer component to use translation keys
+- [✅] Update Footer component to use translation keys
 - [ ] Update SEO metadata across all pages to use translation keys
 - [ ] Update ThankYou page to use translation keys
 - [ ] Update TermsOfUse page to use translation keys
