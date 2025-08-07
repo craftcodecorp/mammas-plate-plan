@@ -6,52 +6,59 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FadeInUp, StaggerContainer, StaggerItem } from "@/components/ui/animated-elements";
+import { useLanguage } from "@/lib/use-language";
 
-const faqItems = [
+// Create FAQ items array dynamically using translation keys
+const createFaqItems = (t: (key: string) => string) => [
   {
-    question: "Como funciona o Cardápio Fácil?",
-    answer: "Após se cadastrar, você receberá semanalmente no seu WhatsApp um cardápio personalizado com base no perfil da sua família, incluindo lista de compras organizada e receitas detalhadas. Tudo isso sem precisar baixar aplicativos ou fazer login em plataformas complicadas."
+    question: t('faq.item1.question'),
+    answer: t('faq.item1.answer')
   },
   {
-    question: "Quanto custa o serviço?",
-    answer: "Oferecemos um teste gratuito de 7 dias para que você experimente o serviço sem compromisso. Após esse período, o valor é de R$29,90 por mês, com possibilidade de cancelamento a qualquer momento."
+    question: t('faq.item2.question'),
+    answer: t('faq.item2.answer')
   },
   {
-    question: "Como são elaborados os cardápios?",
-    answer: "Nossos cardápios são elaborados por nutricionistas especializados, considerando as necessidades nutricionais da sua família, preferências alimentares e eventuais restrições. Utilizamos ingredientes sazonais e de fácil acesso em supermercados."
+    question: t('faq.item3.question'),
+    answer: t('faq.item3.answer')
   },
   {
-    question: "Posso personalizar meu cardápio?",
-    answer: "Sim! Durante o cadastro, você informa o perfil da sua família, incluindo número de pessoas, idades, preferências e restrições alimentares. Além disso, você pode solicitar ajustes a qualquer momento respondendo às mensagens no WhatsApp."
+    question: t('faq.item4.question'),
+    answer: t('faq.item4.answer')
   },
   {
-    question: "Como funciona para famílias com bebês?",
-    answer: "Para famílias com bebês, incluímos orientações específicas para introdução alimentar, respeitando a idade da criança e as recomendações pediátricas atuais, com receitas adaptadas que toda a família pode consumir."
+    question: t('faq.item5.question'),
+    answer: t('faq.item5.answer')
   },
   {
-    question: "E se eu tiver restrições alimentares?",
-    answer: "Nossos cardápios são totalmente adaptáveis para diversas restrições alimentares, como intolerância à lactose, glúten, vegetarianismo, veganismo e alergias específicas. Basta informar suas necessidades no cadastro."
+    question: t('faq.item6.question'),
+    answer: t('faq.item6.answer')
   },
   {
-    question: "Posso cancelar a qualquer momento?",
-    answer: "Sim, você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas adicionais. Basta enviar uma mensagem pelo WhatsApp solicitando o cancelamento."
+    question: t('faq.item7.question'),
+    answer: t('faq.item7.answer')
   },
   {
-    question: "Como é feito o pagamento?",
-    answer: "O pagamento é feito mensalmente via PIX ou cartão de crédito. Você receberá as instruções de pagamento após o período de teste gratuito."
+    question: t('faq.item8.question'),
+    answer: t('faq.item8.answer')
   }
 ];
 
 const FAQ = () => {
+  const { t } = useLanguage();
+  
+  // Generate FAQ items using the translation function
+  const faqItems = createFaqItems(t);
+  
   return (
     <section className="py-20 bg-muted/30" id="faq">
       <div className="container mx-auto px-4">
         <FadeInUp className="text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Perguntas Frequentes
+            {t('faq.title')}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tire suas dúvidas sobre o Cardápio Fácil e como podemos ajudar sua família
+            {t('faq.subtitle')}
           </p>
         </FadeInUp>
 
