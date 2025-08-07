@@ -10,10 +10,12 @@ import { validateName, validateWhatsApp, validateSelect, formatWhatsAppNumber, p
 import { sendWelcomeMessage } from "@/lib/whatsapp-service";
 import { createPartialProfile } from "@/lib/user-service";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/lib/use-language";
 
 const CTASection = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   const [formData, setFormData] = useState({
     name: "",
@@ -81,8 +83,8 @@ const CTASection = () => {
     const nameError = validateName(formData.name);
     const whatsappError = validateWhatsApp(formData.whatsapp);
     const familySizeError = validateSelect(formData.familySize);
-    const termsError = !formData.acceptedTerms ? "Você precisa aceitar os termos de uso" : "";
-    const privacyError = !formData.acceptedPrivacyPolicy ? "Você precisa aceitar a política de privacidade" : "";
+    const termsError = !formData.acceptedTerms ? t('cta.form.terms.error') : "";
+    const privacyError = !formData.acceptedPrivacyPolicy ? t('cta.form.privacy.error') : "";
     
     setErrors({
       name: nameError || "",
@@ -111,8 +113,8 @@ const CTASection = () => {
     
     if (!validateForm()) {
       toast({
-        title: "Por favor, corrija os erros no formulário",
-        description: "Alguns campos precisam ser preenchidos corretamente.",
+        title: t('cta.form.error.title'),
+        description: t('cta.form.error.description'),
         variant: "destructive"
       });
       return;
@@ -149,8 +151,8 @@ const CTASection = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
-        title: "Erro ao processar seu cadastro",
-        description: error instanceof Error ? error.message : "Por favor, tente novamente em alguns instantes.",
+        title: t('cta.form.error.title'),
+        description: error instanceof Error ? error.message : t('cta.form.error.description'),
         variant: "destructive"
       });
     } finally {
@@ -166,35 +168,37 @@ const CTASection = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-              Pronto para transformar a alimentação da sua família?
+              {t('cta.title')}
             </h2>
             <p className="text-xl text-white/90 mb-6">
-              Comece seu teste gratuito agora e receba seu primeiro cardápio em 24 horas!
+              {t('cta.subtitle')}
             </p>
             
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur text-white px-6 py-3 rounded-full">
               <Gift className="w-5 h-5 text-secondary-glow" />
-              <span className="font-semibold">7 dias grátis • Sem compromisso</span>
+              <span className="font-semibold">{t('cta.freeTrial')}</span>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-strong p-8 max-w-2xl mx-auto">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-bold text-foreground mb-2">
-                Cadastre-se gratuitamente
+                {t('cta.form.title')}
               </h3>
               <p className="text-muted-foreground">
-                Leva menos de 2 minutos para começar
+                {t('cta.form.description')}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Nome completo</Label>
+                  <Label htmlFor="name" className="text-foreground">
+                    {t('cta.form.name.label')}
+                  </Label>
                   <Input
                     id="name"
-                    placeholder="Ex: Maria Silva"
+                    placeholder={t('cta.form.name.placeholder')}
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     onBlur={() => setFormTouched({...formTouched, name: true})}
@@ -208,10 +212,12 @@ const CTASection = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="whatsapp">WhatsApp</Label>
+                  <Label htmlFor="whatsapp" className="text-foreground">
+                    {t('cta.form.whatsapp.label')}
+                  </Label>
                   <Input
                     id="whatsapp"
-                    placeholder="(11) 99999-9999"
+                    placeholder={t('cta.form.whatsapp.placeholder')}
                     value={formData.whatsapp}
                     onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
                     onBlur={() => setFormTouched({...formTouched, whatsapp: true})}
@@ -226,7 +232,9 @@ const CTASection = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="familySize">Composição familiar</Label>
+                <Label htmlFor="familySize" className="text-foreground">
+                  {t('cta.form.familySize.label')}
+                </Label>
                 <Select 
                   value={formData.familySize} 
                   onValueChange={(value) => {
@@ -236,39 +244,40 @@ const CTASection = () => {
                   disabled={isSubmitting}
                 >
                   <SelectTrigger className={errors.familySize ? "border-red-500" : ""}>
-                    <SelectValue placeholder="Selecione o perfil da sua família" />
+                    <SelectValue placeholder={t('cta.form.familySize.placeholder')} />
                   </SelectTrigger>
                   {errors.familySize && (
                     <p className="text-sm text-red-500">{errors.familySize}</p>
                   )}
                   <SelectContent>
-                    <SelectItem value="single">Apenas eu</SelectItem>
-                    <SelectItem value="couple">Casal sem filhos</SelectItem>
-                    <SelectItem value="baby">Casal com bebê (até 2 anos)</SelectItem>
-                    <SelectItem value="children">Família com crianças (2-12 anos)</SelectItem>
-                    <SelectItem value="teens">Família com adolescentes</SelectItem>
-                    <SelectItem value="mixed">Família mista (várias idades)</SelectItem>
+                    <SelectItem value="1">{t('cta.form.familySize.option.1')}</SelectItem>
+                    <SelectItem value="2">{t('cta.form.familySize.option.2')}</SelectItem>
+                    <SelectItem value="3">{t('cta.form.familySize.option.3')}</SelectItem>
+                    <SelectItem value="4">{t('cta.form.familySize.option.4')}</SelectItem>
+                    <SelectItem value="5+">{t('cta.form.familySize.option.5')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="dietary">Restrições alimentares</Label>
+                <Label htmlFor="dietaryRestrictions" className="text-foreground">
+                  {t('cta.form.dietaryRestrictions.label')}
+                </Label>
                 <Select 
                   value={formData.dietaryRestrictions} 
                   onValueChange={(value) => setFormData({...formData, dietaryRestrictions: value})}
                   disabled={isSubmitting}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Alguma restrição ou preferência?" />
+                    <SelectValue placeholder={t('cta.form.dietaryRestrictions.placeholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="none">Nenhuma restrição</SelectItem>
-                    <SelectItem value="vegetarian">Vegetariano</SelectItem>
-                    <SelectItem value="lactose">Sem lactose</SelectItem>
-                    <SelectItem value="gluten">Sem glúten</SelectItem>
-                    <SelectItem value="diabetic">Diabético</SelectItem>
-                    <SelectItem value="multiple">Múltiplas restrições</SelectItem>
+                    <SelectItem value="none">{t('cta.form.dietaryRestrictions.option.none')}</SelectItem>
+                    <SelectItem value="vegetarian">{t('cta.form.dietaryRestrictions.option.vegetarian')}</SelectItem>
+                    <SelectItem value="lactose">{t('cta.form.dietaryRestrictions.option.lactose')}</SelectItem>
+                    <SelectItem value="gluten">{t('cta.form.dietaryRestrictions.option.gluten')}</SelectItem>
+                    <SelectItem value="diabetic">{t('cta.form.dietaryRestrictions.option.diabetic')}</SelectItem>
+                    <SelectItem value="multiple">{t('cta.form.dietaryRestrictions.option.multiple')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -283,12 +292,12 @@ const CTASection = () => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                    Processando...
+                    {t('cta.form.button.loading')}
                   </>
                 ) : (
                   <>
                     <MessageCircle className="w-5 h-5 mr-2" />
-                    Começar teste grátis de 7 dias
+                    {t('cta.form.button.submit')}
                   </>
                 )}
               </Button>
@@ -308,7 +317,7 @@ const CTASection = () => {
                     htmlFor="terms"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    Aceito os <a href="/terms-of-use" className="text-primary underline">termos de uso</a>
+                    {t('cta.form.terms.text')} <a href="/terms-of-use" className="text-primary underline">{t('cta.form.terms.link')}</a>
                   </label>
                 </div>
                 {errors.acceptedTerms && (
@@ -329,7 +338,7 @@ const CTASection = () => {
                     htmlFor="privacy"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    Aceito a <a href="/privacy-policy" className="text-primary underline">política de privacidade</a>
+                    {t('cta.form.privacy.text')} <a href="/privacy-policy" className="text-primary underline">{t('cta.form.privacy.link')}</a>
                   </label>
                 </div>
                 {errors.acceptedPrivacyPolicy && (
@@ -337,7 +346,7 @@ const CTASection = () => {
                 )}
                 
                 <p className="text-center text-sm text-muted-foreground mt-2">
-                  Seu primeiro cardápio chegará em até 24 horas após a confirmação do cadastro.
+                  {t('cta.form.confirmation')}
                 </p>
               </div>
             </form>
