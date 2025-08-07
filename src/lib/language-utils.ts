@@ -283,6 +283,27 @@ export const translations: Record<Language, Record<string, string>> = {
     'notfound.message': 'Oops! Página não encontrada',
     'notfound.return': 'Voltar para a Página Inicial',
     
+    // UI Components
+    'ui.brand': 'Cardápio Fácil',
+    'ui.accessibility.sr.close': 'Fechar',
+    'ui.accessibility.sr.more': 'Mais',
+    'ui.accessibility.sr.toggle_theme': 'Alternar tema',
+    'ui.accessibility.sr.toggle_sidebar': 'Alternar barra lateral',
+    'ui.accessibility.sr.previous_slide': 'Slide anterior',
+    'ui.accessibility.sr.next_slide': 'Próximo slide',
+    'ui.accessibility.sr.more_pages': 'Mais páginas',
+    
+    // Testing components
+    'testing.responsive.title': 'Teste Responsivo',
+    'testing.responsive.hide': 'Ocultar Teste',
+    'testing.responsive.current_viewport': 'Viewport Atual',
+    'testing.responsive.browser_info': 'Informações do Navegador',
+    'testing.responsive.testing_size': 'Tamanho de Teste',
+    'testing.responsive.test_devices': 'Dispositivos de Teste',
+    'testing.responsive.rotate': 'Girar',
+    'testing.responsive.reset': 'Resetar',
+    'testing.responsive.close': 'Fechar',
+    
     // ThankYou page
     'thankyou.title': 'Obrigado pelo seu cadastro!',
     'thankyou.subtitle': 'Estamos preparando seu cardápio personalizado.',
@@ -700,6 +721,27 @@ export const translations: Record<Language, Record<string, string>> = {
     'notfound.error': '404',
     'notfound.message': 'Oops! Page not found',
     'notfound.return': 'Return to Home',
+    
+    // UI Components
+    'ui.brand': 'Easy Menu',
+    'ui.accessibility.sr.close': 'Close',
+    'ui.accessibility.sr.more': 'More',
+    'ui.accessibility.sr.toggle_theme': 'Toggle theme',
+    'ui.accessibility.sr.toggle_sidebar': 'Toggle sidebar',
+    'ui.accessibility.sr.previous_slide': 'Previous slide',
+    'ui.accessibility.sr.next_slide': 'Next slide',
+    'ui.accessibility.sr.more_pages': 'More pages',
+    
+    // Testing components
+    'testing.responsive.title': 'Responsive Testing',
+    'testing.responsive.hide': 'Hide Tester',
+    'testing.responsive.current_viewport': 'Current Viewport',
+    'testing.responsive.browser_info': 'Browser Info',
+    'testing.responsive.testing_size': 'Testing Size',
+    'testing.responsive.test_devices': 'Test Devices',
+    'testing.responsive.rotate': 'Rotate',
+    'testing.responsive.reset': 'Reset',
+    'testing.responsive.close': 'Close',
     
     // ThankYou page
     'thankyou.title': 'Thank you for your registration!',
