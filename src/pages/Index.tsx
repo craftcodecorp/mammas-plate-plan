@@ -14,7 +14,7 @@ import { useLanguage } from "@/lib/use-language";
 
 const Index = () => {
   const location = useLocation();
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -29,12 +29,12 @@ const Index = () => {
       showBreadcrumbs={false}
       header={<Header />}
       seo={{
-        title: "Mamma's Plate Plan - Planejamento de refeições saudáveis",
-        description: "Planejamento de refeições saudáveis e deliciosas para toda a família. Economize tempo e dinheiro com nosso serviço de cardápio fácil.",
+        title: t('seo.home.title'),
+        description: t('seo.home.description'),
         canonical,
         openGraph: {
-          title: "Mamma's Plate Plan - Planejamento de refeições saudáveis",
-          description: "Planejamento de refeições saudáveis e deliciosas para toda a família. Economize tempo e dinheiro com nosso serviço de cardápio fácil.",
+          title: t('seo.home.title'),
+          description: t('seo.home.description'),
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,
@@ -47,7 +47,7 @@ const Index = () => {
           image: `${baseUrl}/twitter-image.jpg`
         },
         additionalMetaTags: [
-          { name: 'keywords', content: 'planejamento de refeições, cardápio semanal, receitas saudáveis, economia de tempo, economia de dinheiro' }
+          { name: 'keywords', content: t('seo.home.keywords') }
         ]
       }}
     >
