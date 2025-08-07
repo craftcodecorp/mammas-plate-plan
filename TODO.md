@@ -76,7 +76,7 @@
 - [✅] Update Hero component to use translation keys
 - [✅] Update Features component to use translation keys
 - [✅] Update HowItWorks component to use translation keys
-- [ ] Update Pricing component to use translation keys
+- [✅] Update Pricing component to use translation keys
 - [ ] Update Testimonials component to use translation keys
 - [ ] Update FAQ component to use translation keys
 - [ ] Update CTASection component to use translation keys
