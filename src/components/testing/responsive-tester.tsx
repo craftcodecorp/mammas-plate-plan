@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { detectBrowser, BrowserInfo } from '@/lib/compatibility/browser-detection';
-import { useLanguage } from '@/lib/use-language';
+import { LanguageContext } from '@/lib/language-context';
 
 // Define common device sizes for testing
 const deviceSizes = [
@@ -31,7 +31,31 @@ interface ResponsiveTesterProps {
 export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
   onlyInDevelopment = true,
 }) => {
-  const { t } = useLanguage();
+  // Use React.useContext directly to safely check if we're within a LanguageProvider
+  const languageContext = React.useContext(LanguageContext);
+  
+  // Create a safe translation function that works even outside the LanguageProvider
+  const safeTranslate = (key: string): string => {
+    if (languageContext) {
+      return languageContext.t(key);
+    }
+    
+    // Fallback translations for when used outside LanguageProvider
+    const fallbackTranslations: Record<string, string> = {
+      'testing.responsive.title': 'Responsive Testing',
+      'testing.responsive.hide': 'Hide Tester',
+      'testing.responsive.current_viewport': 'Current Viewport',
+      'testing.responsive.browser_info': 'Browser Info',
+      'testing.responsive.testing_size': 'Testing Size',
+      'testing.responsive.test_devices': 'Test Devices',
+      'testing.responsive.rotate': 'Rotate',
+      'testing.responsive.reset': 'Reset',
+      'testing.responsive.close': 'Close'
+    };
+    
+    return fallbackTranslations[key] || key;
+  };
+  
   const [isVisible, setIsVisible] = useState(false);
   const [currentSize, setCurrentSize] = useState<{ width: number; height: number } | null>(null);
   const [orientation, setOrientation] = useState<Orientation>('portrait');
@@ -129,15 +153,15 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
         onClick={toggleVisibility}
         className="bg-white shadow-md"
       >
-        {isVisible ? t('testing.responsive.hide') : t('testing.responsive.title')}
+        {isVisible ? safeTranslate('testing.responsive.hide') : safeTranslate('testing.responsive.title')}
       </Button>
       
       {isVisible && (
         <div className="mt-2 p-4 bg-white rounded-lg shadow-lg border border-gray-200 max-w-md">
-          <h3 className="text-lg font-semibold mb-2">{t('testing.responsive.title')}</h3>
+          <h3 className="text-lg font-semibold mb-2">{safeTranslate('testing.responsive.title')}</h3>
           
           <div className="mb-4">
-            <h4 className="text-sm font-medium mb-1">{t('testing.responsive.current_viewport')}</h4>
+            <h4 className="text-sm font-medium mb-1">{safeTranslate('testing.responsive.current_viewport')}</h4>
             <p className="text-sm">
               {viewportSize.width} × {viewportSize.height}px
             </p>
@@ -145,7 +169,7 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           {browserInfo && (
             <div className="mb-4">
-              <h4 className="text-sm font-medium mb-1">{t('testing.responsive.browser_info')}</h4>
+              <h4 className="text-sm font-medium mb-1">{safeTranslate('testing.responsive.browser_info')}</h4>
               <p className="text-sm">
                 {browserInfo.name} {browserInfo.version}
                 {browserInfo.isMobile ? ' (Mobile)' : browserInfo.isTablet ? ' (Tablet)' : ' (Desktop)'}
@@ -155,23 +179,23 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           {currentSize && (
             <div className="mb-4">
-              <h4 className="text-sm font-medium mb-1">{t('testing.responsive.testing_size')}</h4>
+              <h4 className="text-sm font-medium mb-1">{safeTranslate('testing.responsive.testing_size')}</h4>
               <p className="text-sm">
                 {currentSize.width} × {currentSize.height}px ({orientation})
               </p>
               <div className="mt-2 flex space-x-2">
                 <Button size="sm" variant="outline" onClick={toggleOrientation}>
-                  {t('testing.responsive.rotate')}
+                  {safeTranslate('testing.responsive.rotate')}
                 </Button>
                 <Button size="sm" variant="outline" onClick={resetView}>
-                  {t('testing.responsive.reset')}
+                  {safeTranslate('testing.responsive.reset')}
                 </Button>
               </div>
             </div>
           )}
           
           <div className="mb-2">
-            <h4 className="text-sm font-medium mb-1">{t('testing.responsive.test_devices')}</h4>
+            <h4 className="text-sm font-medium mb-1">{safeTranslate('testing.responsive.test_devices')}</h4>
             <div className="grid grid-cols-2 gap-2">
               {deviceSizes.map((device) => (
                 <Button
@@ -189,7 +213,7 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           <div className="mt-4">
             <Button size="sm" variant="default" onClick={toggleVisibility}>
-              {t('testing.responsive.close')}
+              {safeTranslate('testing.responsive.close')}
             </Button>
           </div>
         </div>
