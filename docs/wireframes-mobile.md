@@ -223,7 +223,7 @@
 | • WhatsApp                |
 | • Social Media            |
 |                           |
-| © 2025 Weekly Meal Planner|
+| © 2025 CardapioFacil      |
 | All rights reserved.      |
 |                           |
 +---------------------------+

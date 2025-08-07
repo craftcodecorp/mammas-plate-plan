@@ -159,7 +159,7 @@
 |  • Link           • Terms          • WhatsApp                         |
 |  • Link           • Cookies        • Social Media                     |
 |                                                                       |
-|  © 2025 Weekly Meal Planner. All rights reserved.                     |
+|  © 2025 CardapioFacil. All rights reserved.                     |
 |                                                                       |
 +-----------------------------------------------------------------------+
 ```

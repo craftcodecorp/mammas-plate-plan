@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold">Meal Planner</h3>
+            <h3 className="text-xl font-bold">CardapioFacil</h3>
             <p className="text-white/80 text-sm">
               Planejamento de refeições personalizadas para famílias brasileiras, 
               direto no seu WhatsApp.
@@ -54,10 +54,18 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/20 mt-8 pt-8 text-center">
-          <p className="text-white/80 text-sm flex items-center justify-center gap-2">
-            © 2025 Meal Planner. Feito com <Heart className="w-4 h-4 text-red-400" /> para famílias brasileiras.
-          </p>
+        <div className="border-t border-white/20 mt-8 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-white/80 text-sm flex items-center justify-center gap-2">
+              © 2025 CardapioFacil. Feito com <Heart className="w-4 h-4 text-red-400" /> para famílias brasileiras.
+            </p>
+            <div className="text-white/80 text-sm text-center md:text-right">
+              <p><strong>Empresa responsável:</strong> CraftCode</p>
+              <p><strong>CNPJ:</strong> 32.279.133/0001-35</p>
+              <p>Uma solução desenvolvida pela CraftCode</p>
+              <a href="https://craftcode.com.br" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">🔗 craftcode.com.br</a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
