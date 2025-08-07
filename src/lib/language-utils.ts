@@ -92,6 +92,16 @@ export const translations: Record<Language, Record<string, string>> = {
     'how.step3.title': 'Prepare as refeições',
     'how.step3.description': 'Siga as receitas simples e práticas para preparar refeições deliciosas para sua família.',
     
+    // HowItWorks component
+    'how.component.heading': 'Como funciona?',
+    'how.component.subheading': 'Em apenas 3 passos simples, você terá um planejamento completo de refeições para toda a semana.',
+    'how.component.step1.title': 'Crie seu perfil',
+    'how.component.step1.description': 'Conte sobre sua família, idades das crianças, restrições alimentares e preferências.',
+    'how.component.step2.title': 'Receba no WhatsApp',
+    'how.component.step2.description': 'Toda segunda-feira receba seu cardápio da semana e lista de compras organizada.',
+    'how.component.step3.title': 'Cozinhe e aproveite',
+    'how.component.step3.description': 'Siga o planejamento e tenha mais tempo para curtir momentos em família.',
+    
     // Pricing section
     'pricing.title': 'Planos e Preços',
     'pricing.subtitle': 'Escolha o plano ideal para sua família',
@@ -226,6 +236,16 @@ export const translations: Record<Language, Record<string, string>> = {
     'how.step2.description': 'Every week you\'ll receive a personalized meal plan with a shopping list via WhatsApp.',
     'how.step3.title': 'Prepare the meals',
     'how.step3.description': 'Follow the simple and practical recipes to prepare delicious meals for your family.',
+    
+    // HowItWorks component
+    'how.component.heading': 'How does it work?',
+    'how.component.subheading': 'In just 3 simple steps, you\'ll have a complete meal plan for the entire week.',
+    'how.component.step1.title': 'Create your profile',
+    'how.component.step1.description': 'Tell us about your family, children\'s ages, dietary restrictions, and preferences.',
+    'how.component.step2.title': 'Receive on WhatsApp',
+    'how.component.step2.description': 'Every Monday receive your weekly meal plan and organized shopping list.',
+    'how.component.step3.title': 'Cook and enjoy',
+    'how.component.step3.description': 'Follow the plan and have more time to enjoy moments with your family.',
     
     // Pricing section
     'pricing.title': 'Plans and Pricing',
