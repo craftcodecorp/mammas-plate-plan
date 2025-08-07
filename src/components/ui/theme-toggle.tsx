@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 // Import from next-themes package instead of local theme provider
 import { useTheme as useNextTheme } from "next-themes";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/use-language";
 
 /**
  * ThemeToggle component for switching between light and dark mode
@@ -14,6 +15,7 @@ import { motion } from "framer-motion";
  */
 export function ThemeToggle() {
   const { theme, setTheme } = useNextTheme();
+  const { t } = useLanguage();
 
   return (
     <Button
@@ -33,7 +35,7 @@ export function ThemeToggle() {
           <Sun className="h-4 w-4" />
         )}
       </motion.div>
-      <span className="sr-only">Toggle theme</span>
+      <span className="sr-only">{t('ui.accessibility.sr.toggle_theme')}</span>
     </Button>
   );
 }

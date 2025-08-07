@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { detectBrowser, BrowserInfo } from '@/lib/compatibility/browser-detection';
+import { useLanguage } from '@/lib/use-language';
 
 // Define common device sizes for testing
 const deviceSizes = [
@@ -30,6 +31,7 @@ interface ResponsiveTesterProps {
 export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
   onlyInDevelopment = true,
 }) => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [currentSize, setCurrentSize] = useState<{ width: number; height: number } | null>(null);
   const [orientation, setOrientation] = useState<Orientation>('portrait');
@@ -127,15 +129,15 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
         onClick={toggleVisibility}
         className="bg-white shadow-md"
       >
-        {isVisible ? 'Hide Tester' : 'Responsive Tester'}
+        {isVisible ? t('testing.responsive.hide') : t('testing.responsive.title')}
       </Button>
       
       {isVisible && (
         <div className="mt-2 p-4 bg-white rounded-lg shadow-lg border border-gray-200 max-w-md">
-          <h3 className="text-lg font-semibold mb-2">Responsive Testing</h3>
+          <h3 className="text-lg font-semibold mb-2">{t('testing.responsive.title')}</h3>
           
           <div className="mb-4">
-            <h4 className="text-sm font-medium mb-1">Current Viewport</h4>
+            <h4 className="text-sm font-medium mb-1">{t('testing.responsive.current_viewport')}</h4>
             <p className="text-sm">
               {viewportSize.width} × {viewportSize.height}px
             </p>
@@ -143,7 +145,7 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           {browserInfo && (
             <div className="mb-4">
-              <h4 className="text-sm font-medium mb-1">Browser Info</h4>
+              <h4 className="text-sm font-medium mb-1">{t('testing.responsive.browser_info')}</h4>
               <p className="text-sm">
                 {browserInfo.name} {browserInfo.version}
                 {browserInfo.isMobile ? ' (Mobile)' : browserInfo.isTablet ? ' (Tablet)' : ' (Desktop)'}
@@ -153,23 +155,23 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           {currentSize && (
             <div className="mb-4">
-              <h4 className="text-sm font-medium mb-1">Testing Size</h4>
+              <h4 className="text-sm font-medium mb-1">{t('testing.responsive.testing_size')}</h4>
               <p className="text-sm">
                 {currentSize.width} × {currentSize.height}px ({orientation})
               </p>
               <div className="mt-2 flex space-x-2">
                 <Button size="sm" variant="outline" onClick={toggleOrientation}>
-                  Rotate
+                  {t('testing.responsive.rotate')}
                 </Button>
                 <Button size="sm" variant="outline" onClick={resetView}>
-                  Reset
+                  {t('testing.responsive.reset')}
                 </Button>
               </div>
             </div>
           )}
           
           <div className="mb-2">
-            <h4 className="text-sm font-medium mb-1">Test Devices</h4>
+            <h4 className="text-sm font-medium mb-1">{t('testing.responsive.test_devices')}</h4>
             <div className="grid grid-cols-2 gap-2">
               {deviceSizes.map((device) => (
                 <Button
@@ -187,7 +189,7 @@ export const ResponsiveTester: React.FC<ResponsiveTesterProps> = ({
           
           <div className="mt-4">
             <Button size="sm" variant="default" onClick={toggleVisibility}>
-              Close
+              {t('testing.responsive.close')}
             </Button>
           </div>
         </div>

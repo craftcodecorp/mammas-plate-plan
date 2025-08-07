@@ -44,7 +44,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <span className="text-xl font-bold text-foreground">Cardápio Fácil</span>
+            <span className="text-xl font-bold text-foreground">{t('ui.brand')}</span>
           </a>
 
           {/* Navigation */}

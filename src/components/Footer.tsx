@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold">CardapioFacil</h3>
+            <h3 className="text-xl font-bold">{t('ui.brand')}</h3>
             <p className="text-white/80 text-sm">
               {t('footer.brand.description')}
             </p>
