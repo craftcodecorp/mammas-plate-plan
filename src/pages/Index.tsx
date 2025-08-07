@@ -27,6 +27,7 @@ const Index = () => {
   return (
     <PageLayout
       showBreadcrumbs={false}
+      header={<Header />}
       seo={{
         title: "Mamma's Plate Plan - Planejamento de refeições saudáveis",
         description: "Planejamento de refeições saudáveis e deliciosas para toda a família. Economize tempo e dinheiro com nosso serviço de cardápio fácil.",
@@ -51,7 +52,6 @@ const Index = () => {
       }}
     >
       <div className="min-h-screen">
-        <Header />
         <Hero />
         <Features />
         <HowItWorks />

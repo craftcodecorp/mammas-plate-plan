@@ -19,6 +19,7 @@ const TermsOfUse = () => {
   return (
     <PageLayout
       showBreadcrumbs={true}
+      header={<Header />}
       seo={{
         title: "Termos de Uso | Mamma's Plate Plan",
         description: "Termos e condições de uso do serviço Mamma's Plate Plan. Leia atentamente antes de utilizar nossos serviços.",
@@ -37,7 +38,6 @@ const TermsOfUse = () => {
       }}
     >
       <div className="min-h-screen bg-background">
-        <Header />
         
         <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">

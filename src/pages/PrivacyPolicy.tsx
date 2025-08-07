@@ -19,6 +19,7 @@ const PrivacyPolicy = () => {
   return (
     <PageLayout
       showBreadcrumbs={true}
+      header={<Header />}
       seo={{
         title: "Política de Privacidade | Mamma's Plate Plan",
         description: "Política de privacidade do serviço Mamma's Plate Plan. Saiba como protegemos seus dados e informações pessoais.",
@@ -37,7 +38,6 @@ const PrivacyPolicy = () => {
       }}
     >
       <div className="min-h-screen bg-background">
-        <Header />
         
         <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">

@@ -14,6 +14,7 @@ interface PageLayoutProps {
   breadcrumbsClassName?: string;
   seo?: SEOMetadata;
   structuredData?: string;
+  header?: React.ReactNode;
 }
 
 /**
@@ -30,6 +31,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   breadcrumbsClassName,
   seo,
   structuredData,
+  header,
 }) => {
   const location = useLocation();
   const { language } = useLanguage();
@@ -67,17 +69,24 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
         />
       )}
       
-      {showBreadcrumbs && (
-        <div className={cn('container mx-auto px-4 py-4', breadcrumbsClassName)}>
-          <Breadcrumbs 
-            className="text-sm"
-            baseUrl={baseUrl}
-          />
-        </div>
-      )}
+      {/* Header is rendered first */}
+      {header}
       
-      <div className={cn('flex-grow', containerClassName)}>
-        {children}
+      {/* Add padding to account for fixed header */}
+      <div className="pt-20">  {/* This padding pushes content below the fixed header */}
+        {/* Breadcrumbs are rendered after the header */}
+        {showBreadcrumbs && (
+          <div className={cn('container mx-auto px-4 py-4', breadcrumbsClassName)}>
+            <Breadcrumbs 
+              className="text-sm"
+              baseUrl={baseUrl}
+            />
+          </div>
+        )}
+        
+        <div className={cn('flex-grow', containerClassName)}>
+          {children}
+        </div>
       </div>
     </div>
   );
