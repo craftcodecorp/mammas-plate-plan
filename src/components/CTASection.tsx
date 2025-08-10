@@ -4,18 +4,28 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { MessageCircle, Gift, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateName, validateWhatsApp, validateSelect, formatWhatsAppNumber, prepareWhatsAppNumber } from "@/lib/form-validation";
-import { sendWelcomeMessage } from "@/lib/whatsapp-service";
+import { notifyLandingPageSignup } from "../lib/whatsapp-service";
 import { createPartialProfile } from "@/lib/user-service";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/use-language";
+import { useFormAnalytics, FormStage, FieldInteraction } from "@/lib/analytics/form-analytics";
 
 const CTASection = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { 
+    trackFormView, 
+    trackFieldInteraction, 
+    trackFormStage, 
+    trackFormSubmission, 
+    trackSignupCompletion,
+    FormStage,
+    FieldInteraction
+  } = useFormAnalytics();
   
   const [formData, setFormData] = useState({
     name: "",
@@ -45,17 +55,48 @@ const CTASection = () => {
     acceptedPrivacyPolicy: false
   });
   
+  // Track if form has been started
+  const formStarted = useRef(false);
+  
+  // Define validateForm before using it in useEffect
+  const validateForm = useCallback(() => {
+    const nameError = validateName(formData.name);
+    const whatsappError = validateWhatsApp(formData.whatsapp);
+    const familySizeError = validateSelect(formData.familySize);
+    const termsError = !formData.acceptedTerms ? t('cta.form.terms.error') : "";
+    const privacyError = !formData.acceptedPrivacyPolicy ? t('cta.form.privacy.error') : "";
+    
+    setErrors({
+      name: nameError || "",
+      whatsapp: whatsappError || "",
+      familySize: familySizeError || "",
+      dietaryRestrictions: "",
+      acceptedTerms: termsError,
+      acceptedPrivacyPolicy: privacyError
+    });
+    
+    return !nameError && !whatsappError && !familySizeError && !termsError && !privacyError;
+  }, [formData, t]);
+  
   // Format WhatsApp number as user types
   useEffect(() => {
     if (formData.whatsapp && formTouched.whatsapp) {
-      setFormData(prev => ({
-        ...prev,
-        whatsapp: formatWhatsAppNumber(prev.whatsapp)
-      }));
+      const formatted = formatWhatsAppNumber(formData.whatsapp);
+      if (formatted !== formData.whatsapp) {
+        setFormData({...formData, whatsapp: formatted});
+      }
     }
-  }, [formData.whatsapp, formTouched.whatsapp]);
+  }, [formData, formTouched.whatsapp]);
   
-  // Validate form fields when they change
+  // Track form view when component mounts
+  useEffect(() => {
+    // Validate form on mount
+    validateForm();
+    
+    // Track form view when component mounts
+    trackFormView('landing_page_signup', 'landing_page');
+  }, [validateForm, trackFormView]);
+  
   useEffect(() => {
     if (formTouched.name) {
       setErrors(prev => ({
@@ -77,29 +118,60 @@ const CTASection = () => {
         familySize: validateSelect(formData.familySize) || ""
       }));
     }
-  }, [formData, formTouched]);
+    
+    if (formTouched.acceptedTerms) {
+      setErrors(prev => ({
+        ...prev,
+        acceptedTerms: !formData.acceptedTerms ? t('cta.form.terms.error') : ""
+      }));
+    }
+    
+    if (formTouched.acceptedPrivacyPolicy) {
+      setErrors(prev => ({
+        ...prev,
+        acceptedPrivacyPolicy: !formData.acceptedPrivacyPolicy ? t('cta.form.privacy.error') : ""
+      }));
+    }
+  }, [formData, formTouched, t]);
   
-  const validateForm = () => {
-    const nameError = validateName(formData.name);
-    const whatsappError = validateWhatsApp(formData.whatsapp);
-    const familySizeError = validateSelect(formData.familySize);
-    const termsError = !formData.acceptedTerms ? t('cta.form.terms.error') : "";
-    const privacyError = !formData.acceptedPrivacyPolicy ? t('cta.form.privacy.error') : "";
+  const validateField = (fieldName: keyof typeof formData, value: string) => {
+    switch (fieldName) {
+      case 'name':
+        setErrors(prev => ({ ...prev, name: validateName(value) || "" }));
+        break;
+      case 'whatsapp':
+        setErrors(prev => ({ ...prev, whatsapp: validateWhatsApp(value) || "" }));
+        break;
+      case 'familySize':
+        setErrors(prev => ({ ...prev, familySize: validateSelect(value) || "" }));
+        break;
+      default:
+        break;
+    }
+  };
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
     
-    setErrors({
-      name: nameError || "",
-      whatsapp: whatsappError || "",
-      familySize: familySizeError || "",
-      dietaryRestrictions: "",
-      acceptedTerms: termsError,
-      acceptedPrivacyPolicy: privacyError
-    });
+    // Track field interaction
+    trackFieldInteraction('landing_page_signup', name, FieldInteraction.CHANGE);
     
-    return !nameError && !whatsappError && !familySizeError && !termsError && !privacyError;
+    // Validate the changed field
+    validateField(name as keyof typeof formData, value);
+    
+    // If this is the first interaction, track form started
+    if (!formStarted.current) {
+      formStarted.current = true;
+      trackFormStage('landing_page_signup', FormStage.STARTED);
+    }
   };
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Track form submission attempt
+    trackFormStage('landing_page_signup', FormStage.ATTEMPTED);
     
     // Mark all fields as touched to show validation errors
     setFormTouched({
@@ -112,6 +184,21 @@ const CTASection = () => {
     });
     
     if (!validateForm()) {
+      // Track validation errors
+      const errorFields = Object.entries(errors)
+        .filter(([_, value]) => value)
+        .map(([key]) => key);
+      
+      trackFormStage('landing_page_signup', FormStage.FAILED, {
+        error_type: 'validation',
+        error_fields: errorFields
+      });
+      
+      // Track each field with error
+      errorFields.forEach(field => {
+        trackFieldInteraction('landing_page_signup', field, FieldInteraction.ERROR);
+      });
+      
       toast({
         title: t('cta.form.error.title'),
         description: t('cta.form.error.description'),
@@ -120,10 +207,14 @@ const CTASection = () => {
       return;
     }
     
+    // Form is valid
+    trackFormStage('landing_page_signup', FormStage.VALIDATED);
     setIsSubmitting(true);
     
     try {
-      // First create partial profile in User Management Service
+      // Step 1: Create partial profile in User Management Service
+      // This follows the documented flow where landing page creates a partial profile
+      // that will later be completed during WhatsApp onboarding
       const profileResponse = await createPartialProfile({
         name: formData.name,
         phoneNumber: prepareWhatsAppNumber(formData.whatsapp),
@@ -134,22 +225,93 @@ const CTASection = () => {
       });
       
       if (!profileResponse.success) {
+        // Track profile creation failure
+        trackFormStage('landing_page_signup', FormStage.FAILED, {
+          error_type: 'api',
+          error: profileResponse.error?.message || "Unknown error",
+          error_code: profileResponse.error?.code || "UNKNOWN_ERROR"
+        });
         throw new Error(profileResponse.error?.message || "Falha ao criar perfil");
       }
       
-      // Then send welcome message via WhatsApp
-      const messageSent = await sendWelcomeMessage(formData);
+      // Track form submission
+      trackFormStage('landing_page_signup', FormStage.SUBMITTED);
       
-      if (messageSent) {
-        // Navigate to thank you page with form data
-        navigate("/thank-you", { state: { formData } });
+      // Track successful profile creation with detailed analytics
+      trackFormSubmission('landing_page_signup', true, {
+        userId: profileResponse.data?.id,
+        familySize: formData.familySize,
+        hasDietaryRestrictions: !!formData.dietaryRestrictions && formData.dietaryRestrictions !== 'none',
+        dietaryType: formData.dietaryRestrictions || 'none'
+      }, {
+        source: 'landing_page'
+      });
+      
+      // Step 2: Notify WhatsApp Service of the landing page signup
+      // The WhatsApp Service will handle sending the welcome message and managing the onboarding flow
+      // This follows the architecture where all WhatsApp communication goes through the WhatsApp Service
+      const whatsappResponse = await notifyLandingPageSignup(
+        profileResponse.data?.id || 'unknown',
+        formData
+      );
+      
+      // Track WhatsApp notification status
+      const whatsappStatus = whatsappResponse.success ? 'success' : 'failed';
+      
+      if (whatsappResponse.success) {
+        // Track complete signup conversion
+        trackSignupCompletion(
+          profileResponse.data?.id || 'unknown',
+          'landing_page',
+          { 
+            whatsapp_status: whatsappStatus,
+            profile_status: 'PENDING' // Partial profile status as per documentation
+          }
+        );
+        
+        // Track completion stage
+        trackFormStage('landing_page_signup', FormStage.COMPLETED, {
+          whatsapp_status: whatsappStatus,
+          profile_id: profileResponse.data?.id
+        });
+        
+        // Navigate to thank you page with form data and instructions to check WhatsApp
+        navigate("/thank-you", { 
+          state: { 
+            formData,
+            profileId: profileResponse.data?.id,
+            whatsappNotified: true
+          } 
+        });
       } else {
         // Even if WhatsApp message fails, we can still proceed since the profile was created
-        console.warn("WhatsApp message failed to send, but profile was created");
-        navigate("/thank-you", { state: { formData } });
+        console.warn("WhatsApp instruction message failed to send, but partial profile was created");
+        
+        // Track partial completion
+        trackFormStage('landing_page_signup', FormStage.COMPLETED, {
+          whatsapp_status: 'failed',
+          partial_completion: true,
+          profile_id: profileResponse.data?.id
+        });
+        
+        // Still navigate to thank you page, but with a flag indicating WhatsApp notification failure
+        navigate("/thank-you", { 
+          state: { 
+            formData,
+            profileId: profileResponse.data?.id,
+            whatsappNotified: false
+          } 
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      
+      // Track form submission error
+      trackFormStage('landing_page_signup', FormStage.FAILED, {
+        error_type: 'exception',
+        error_message: error instanceof Error ? error.message : 'Unknown error'
+      });
+      
       toast({
         title: t('cta.form.error.title'),
         description: error instanceof Error ? error.message : t('cta.form.error.description'),
@@ -200,7 +362,7 @@ const CTASection = () => {
                     id="name"
                     placeholder={t('cta.form.name.placeholder')}
                     value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    onChange={handleInputChange}
                     onBlur={() => setFormTouched({...formTouched, name: true})}
                     className={errors.name ? "border-red-500" : ""}
                     disabled={isSubmitting}
@@ -219,7 +381,7 @@ const CTASection = () => {
                     id="whatsapp"
                     placeholder={t('cta.form.whatsapp.placeholder')}
                     value={formData.whatsapp}
-                    onChange={(e) => setFormData({...formData, whatsapp: e.target.value})}
+                    onChange={handleInputChange}
                     onBlur={() => setFormTouched({...formTouched, whatsapp: true})}
                     className={errors.whatsapp ? "border-red-500" : ""}
                     disabled={isSubmitting}
@@ -240,6 +402,12 @@ const CTASection = () => {
                   onValueChange={(value) => {
                     setFormData({...formData, familySize: value});
                     setFormTouched({...formTouched, familySize: true});
+                    
+                    // Track field interaction
+                    trackFieldInteraction('landing_page_signup', 'familySize', FieldInteraction.CHANGE);
+                    
+                    // Validate the changed field
+                    validateField('familySize', value);
                   }}
                   disabled={isSubmitting}
                 >
