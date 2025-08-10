@@ -10,6 +10,8 @@ const ThankYou = () => {
   const location = useLocation();
   const { language, t } = useLanguage();
   const formData = location.state?.formData || {};
+  const whatsappNotified = location.state?.whatsappNotified;
+  const profileId = location.state?.profileId;
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -107,7 +109,9 @@ const ThankYou = () => {
             <div>
               <h3 className="font-semibold mb-1">{t('thankyou.whatsapp.title')}</h3>
               <p className="text-muted-foreground text-sm">
-                {t('thankyou.whatsapp.message').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))}
+                {whatsappNotified 
+                  ? t('thankyou.whatsapp.message').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))
+                  : t('thankyou.whatsapp.alternativeMessage').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))}
               </p>
             </div>
           </div>
