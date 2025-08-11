@@ -12,6 +12,7 @@ import { createPartialProfile } from "@/lib/user-service";
 import { useToast } from "@/components/ui/use-toast";
 import { useLanguage } from "@/lib/use-language";
 import { useFormAnalytics, FormStage, FieldInteraction } from "@/lib/analytics/form-analytics";
+import axios from 'axios';
 
 const CTASection = () => {
   const navigate = useNavigate();
@@ -59,24 +60,25 @@ const CTASection = () => {
   const formStarted = useRef(false);
   
   // Define validateForm before using it in useEffect
-  const validateForm = useCallback(() => {
+  const validateForm = useCallback((showAllErrors = false) => {
     const nameError = validateName(formData.name);
     const whatsappError = validateWhatsApp(formData.whatsapp);
     const familySizeError = validateSelect(formData.familySize);
     const termsError = !formData.acceptedTerms ? t('cta.form.terms.error') : "";
     const privacyError = !formData.acceptedPrivacyPolicy ? t('cta.form.privacy.error') : "";
     
+    // Only show errors for fields that have been touched or if showAllErrors is true
     setErrors({
-      name: nameError || "",
-      whatsapp: whatsappError || "",
-      familySize: familySizeError || "",
+      name: (showAllErrors || formTouched.name) ? (nameError || "") : "",
+      whatsapp: (showAllErrors || formTouched.whatsapp) ? (whatsappError || "") : "",
+      familySize: (showAllErrors || formTouched.familySize) ? (familySizeError || "") : "",
       dietaryRestrictions: "",
-      acceptedTerms: termsError,
-      acceptedPrivacyPolicy: privacyError
+      acceptedTerms: (showAllErrors || formTouched.acceptedTerms) ? termsError : "",
+      acceptedPrivacyPolicy: (showAllErrors || formTouched.acceptedPrivacyPolicy) ? privacyError : ""
     });
     
     return !nameError && !whatsappError && !familySizeError && !termsError && !privacyError;
-  }, [formData, t]);
+  }, [formData, formTouched, t]);
   
   // Format WhatsApp number as user types
   useEffect(() => {
@@ -90,12 +92,9 @@ const CTASection = () => {
   
   // Track form view when component mounts
   useEffect(() => {
-    // Validate form on mount
-    validateForm();
-    
     // Track form view when component mounts
     trackFormView('landing_page_signup', 'landing_page');
-  }, [validateForm, trackFormView]);
+  }, [trackFormView]);
   
   useEffect(() => {
     if (formTouched.name) {
@@ -183,7 +182,7 @@ const CTASection = () => {
       acceptedPrivacyPolicy: true
     });
     
-    if (!validateForm()) {
+    if (!validateForm(true)) {
       // Track validation errors
       const errorFields = Object.entries(errors)
         .filter(([_, value]) => value)
@@ -199,9 +198,12 @@ const CTASection = () => {
         trackFieldInteraction('landing_page_signup', field, FieldInteraction.ERROR);
       });
       
+      const formErrorTitle = t('cta.form.error.title');
+      const formErrorDescription = t('cta.form.error.description');
+      
       toast({
-        title: t('cta.form.error.title'),
-        description: t('cta.form.error.description'),
+        title: formErrorTitle,
+        description: formErrorDescription,
         variant: "destructive"
       });
       return;
@@ -218,6 +220,7 @@ const CTASection = () => {
       const profileResponse = await createPartialProfile({
         name: formData.name,
         phoneNumber: prepareWhatsAppNumber(formData.whatsapp),
+        source: 'landing_page',
         familySize: formData.familySize,
         dietaryRestrictions: formData.dietaryRestrictions || undefined,
         acceptedTerms: formData.acceptedTerms,
@@ -231,7 +234,38 @@ const CTASection = () => {
           error: profileResponse.error?.message || "Unknown error",
           error_code: profileResponse.error?.code || "UNKNOWN_ERROR"
         });
-        throw new Error(profileResponse.error?.message || "Falha ao criar perfil");
+        
+        // Check if it's a validation error or server error
+        const errorCode = profileResponse.error?.code || "UNKNOWN_ERROR";
+        
+        // Handle validation errors differently from server errors
+        if (errorCode === 'VALIDATION_ERROR') {
+          // This is a form validation error from the server
+          const validationTitle = t('cta.form.validation.title');
+          const validationDescription = profileResponse.error?.message || t('cta.form.validation.description');
+          
+          toast({
+            title: validationTitle,
+            description: validationDescription,
+            variant: "destructive"
+          });
+        } else {
+          // This is a server error, not related to form validation
+          const serverErrorTitle = t('cta.form.serverError.title');
+          const serverErrorDescription = t('cta.form.serverError.description');
+          
+          toast({
+            title: serverErrorTitle,
+            description: serverErrorDescription,
+            variant: "destructive"
+          });
+          
+          // Log the server error for debugging
+          console.error("Server error during profile creation:", profileResponse.error);
+        }
+        
+        // Don't proceed with form submission
+        return;
       }
       
       // Track form submission
@@ -312,11 +346,53 @@ const CTASection = () => {
         error_message: error instanceof Error ? error.message : 'Unknown error'
       });
       
-      toast({
-        title: t('cta.form.error.title'),
-        description: error instanceof Error ? error.message : t('cta.form.error.description'),
-        variant: "destructive"
-      });
+      // Check if it's an axios error with response data
+      if (axios.isAxiosError(error) && error.response) {
+        const statusCode = error.response.status;
+        const errorData = error.response.data;
+        
+        if (statusCode === 400 && errorData?.code === 'VALIDATION_ERROR') {
+          // This is a validation error from the API
+          const validationErrorTitle = t('cta.form.validation.title');
+          const validationErrorDescription = errorData.message || t('cta.form.validation.description');
+          
+          toast({
+            title: validationErrorTitle,
+            description: validationErrorDescription,
+            variant: "destructive"
+          });
+        } else if (statusCode >= 500) {
+          // This is a server error
+          const serverErrorTitle = t('cta.form.serverError.title');
+          const serverErrorDescription = t('cta.form.serverError.description');
+          
+          toast({
+            title: serverErrorTitle,
+            description: serverErrorDescription,
+            variant: "destructive"
+          });
+        } else {
+          // Other API errors
+          const errorTitle = t('cta.form.error.title');
+          const errorDescription = errorData?.message || t('cta.form.error.description');
+          
+          toast({
+            title: errorTitle,
+            description: errorDescription,
+            variant: "destructive"
+          });
+        }
+      } else {
+        // Generic error handling for non-API errors
+        const genericErrorTitle = t('cta.form.error.title');
+        const genericErrorDescription = error instanceof Error ? error.message : t('cta.form.error.description');
+        
+        toast({
+          title: genericErrorTitle,
+          description: genericErrorDescription,
+          variant: "destructive"
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -360,6 +436,7 @@ const CTASection = () => {
                   </Label>
                   <Input
                     id="name"
+                    name="name"
                     placeholder={t('cta.form.name.placeholder')}
                     value={formData.name}
                     onChange={handleInputChange}
@@ -379,9 +456,22 @@ const CTASection = () => {
                   </Label>
                   <Input
                     id="whatsapp"
+                    name="whatsapp"
+                    type="tel"
                     placeholder={t('cta.form.whatsapp.placeholder')}
                     value={formData.whatsapp}
-                    onChange={handleInputChange}
+                    onChange={(e) => {
+                      // Only allow numeric input and formatting characters
+                      const value = e.target.value.replace(/[^0-9()\s-]/g, '');
+                      setFormData({...formData, whatsapp: value});
+                      trackFieldInteraction('landing_page_signup', 'whatsapp', FieldInteraction.CHANGE);
+                      
+                      // If this is the first interaction, track form started
+                      if (!formStarted.current) {
+                        formStarted.current = true;
+                        trackFormStage('landing_page_signup', FormStage.STARTED);
+                      }
+                    }}
                     onBlur={() => setFormTouched({...formTouched, whatsapp: true})}
                     className={errors.whatsapp ? "border-red-500" : ""}
                     disabled={isSubmitting}
