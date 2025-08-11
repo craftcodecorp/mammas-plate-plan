@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Calendar, MessageCircle } from "lucide-react";
+import { CheckCircle, Calendar, MessageCircle, QrCode } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PageLayout from "@/components/layout/page-layout";
 import { useLanguage } from "@/lib/use-language";
+import { prepareWhatsAppNumber } from "@/lib/form-validation";
+import QRCodeDisplay from "react-qr-code";
 
 const ThankYou = () => {
   const navigate = useNavigate();
@@ -12,6 +14,12 @@ const ThankYou = () => {
   const formData = location.state?.formData || {};
   const whatsappNotified = location.state?.whatsappNotified;
   const profileId = location.state?.profileId;
+  const [showQRCode, setShowQRCode] = useState(false);
+  
+  // Create WhatsApp click-to-chat URL with the business number from environment variables
+  const businessWhatsAppNumber = import.meta.env.VITE_WHATSAPP_BUSINESS_NUMBER || "5511999999999";
+  const welcomeMessage = encodeURIComponent(t('thankyou.whatsapp.welcomeMessage'));
+  const whatsappUrl = `https://wa.me/${businessWhatsAppNumber}?text=${welcomeMessage}`;
   
   // Base URL for canonical links
   const baseUrl = language === 'pt-BR' 
@@ -106,13 +114,47 @@ const ThankYou = () => {
             <div className="bg-primary/10 p-2 rounded-full">
               <MessageCircle className="w-6 h-6 text-primary" />
             </div>
-            <div>
+            <div className="flex-1">
               <h3 className="font-semibold mb-1">{t('thankyou.whatsapp.title')}</h3>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-sm mb-3">
                 {whatsappNotified 
                   ? t('thankyou.whatsapp.message').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))
                   : t('thankyou.whatsapp.alternativeMessage').replace('{whatsapp}', formData.whatsapp || t('thankyou.whatsapp.defaultNumber'))}
               </p>
+              
+              <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                <a 
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-green-600 text-white hover:bg-green-700 h-10 px-4 py-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  {t('thankyou.whatsapp.startChat')}
+                </a>
+                
+                <Button 
+                  variant="outline" 
+                  onClick={() => setShowQRCode(!showQRCode)}
+                  className="flex items-center justify-center gap-2"
+                >
+                  <QrCode className="w-5 h-5" />
+                  {showQRCode ? t('thankyou.whatsapp.hideQrCode') : t('thankyou.whatsapp.showQrCode')}
+                </Button>
+              </div>
+              
+              {showQRCode && (
+                <div className="mt-4 flex flex-col items-center justify-center p-4 bg-white rounded-lg border">
+                  <QRCodeDisplay 
+                    value={whatsappUrl} 
+                    size={180} 
+                    level="H"
+                  />
+                  <p className="text-xs text-muted-foreground mt-2 text-center">
+                    {t('thankyou.whatsapp.scanInstructions')}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
           

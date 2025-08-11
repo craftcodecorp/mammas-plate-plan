@@ -234,6 +234,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'cta.freeTrial': '7 dias grátis • Sem compromisso',
     'cta.form.title': 'Cadastre-se gratuitamente',
     'cta.form.description': 'Leva menos de 2 minutos para começar',
+    'cta.form.validation.title': 'Erro de validação',
+    'cta.form.validation.description': 'Por favor, verifique os campos informados.',
+    'cta.form.serverError.title': 'Erro no servidor',
+    'cta.form.serverError.description': 'Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.',
     
     // Footer
     'footer.rights': 'Todos os direitos reservados',
@@ -326,6 +330,12 @@ export const translations: Record<Language, Record<string, string>> = {
     'thankyou.diet.multiple': 'Múltiplas restrições',
     'thankyou.whatsapp.title': 'Aguarde mensagem no WhatsApp',
     'thankyou.whatsapp.message': 'Enviaremos uma mensagem para {whatsapp} em até 24 horas com seu primeiro cardápio semanal.',
+    'thankyou.whatsapp.alternativeMessage': 'Entre em contato pelo WhatsApp {whatsapp} para iniciar seu plano de refeições.',
+    'thankyou.whatsapp.welcomeMessage': 'Olá! Gostaria de iniciar meu cardápio semanal personalizado pelo CardapioFacil.',
+    'thankyou.whatsapp.startChat': 'Iniciar conversa no WhatsApp',
+    'thankyou.whatsapp.showQrCode': 'Mostrar código QR',
+    'thankyou.whatsapp.hideQrCode': 'Esconder código QR',
+    'thankyou.whatsapp.scanInstructions': 'Escaneie este código QR com a câmera do seu celular para iniciar a conversa no WhatsApp',
     'thankyou.whatsapp.defaultNumber': 'seu número',
     'thankyou.trial.title': 'Seu teste gratuito começou',
     'thankyou.trial.message': 'Você tem acesso a 7 dias de cardápios personalizados. Não se preocupe, avisaremos antes do término.',
@@ -673,6 +683,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'cta.freeTrial': '7 days free • No commitment',
     'cta.form.title': 'Sign up for free',
     'cta.form.description': 'Takes less than 2 minutes to start',
+    'cta.form.validation.title': 'Validation error',
+    'cta.form.validation.description': 'Please verify the information provided.',
+    'cta.form.serverError.title': 'Server error',
+    'cta.form.serverError.description': 'An error occurred while processing your request. Please try again later.',
     
     // Footer
     'footer.rights': 'All rights reserved',
