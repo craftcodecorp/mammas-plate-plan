@@ -14,6 +14,7 @@ const API_BASE_URL = import.meta.env.VITE_USER_SERVICE_URL || 'http://localhost:
 export interface PartialProfileData {
   name: string;
   phoneNumber: string;
+  source: string;
   familySize: string;
   dietaryRestrictions?: string;
   acceptedTerms: boolean;

@@ -17,7 +17,10 @@ const ThankYou = () => {
   const [showQRCode, setShowQRCode] = useState(false);
   
   // Create WhatsApp click-to-chat URL with the business number from environment variables
-  const businessWhatsAppNumber = import.meta.env.VITE_WHATSAPP_BUSINESS_NUMBER || "5511999999999";
+  if (!import.meta.env.VITE_WHATSAPP_BUSINESS_NUMBER) {
+    console.error('WhatsApp Business Number not found in environment variables');
+  }
+  const businessWhatsAppNumber = import.meta.env.VITE_WHATSAPP_BUSINESS_NUMBER
   const welcomeMessage = encodeURIComponent(t('thankyou.whatsapp.welcomeMessage'));
   const whatsappUrl = `https://wa.me/${businessWhatsAppNumber}?text=${welcomeMessage}`;
   

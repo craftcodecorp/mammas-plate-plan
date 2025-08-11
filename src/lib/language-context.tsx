@@ -22,6 +22,14 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.faq': 'FAQ',
     'nav.free_trial': 'Teste Grátis',
     
+    // Form errors
+    'cta.form.error.title': 'Erro no formulário',
+    'cta.form.error.description': 'Por favor, corrija os erros no formulário e tente novamente.',
+    'cta.form.validation.title': 'Erro de validação',
+    'cta.form.validation.description': 'Por favor, verifique os dados informados e tente novamente.',
+    'cta.form.serverError.title': 'Erro no servidor',
+    'cta.form.serverError.description': 'Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.',
+    
     // Hero section
     'hero.title': 'Cardápios semanais personalizados para sua família',
     'hero.subtitle': 'Receba no WhatsApp cardápios personalizados, lista de compras e receitas. Economize tempo e dinheiro, sem estresse.',
@@ -106,6 +114,14 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
     'nav.free_trial': 'Free Trial',
+    
+    // Form errors
+    'cta.form.error.title': 'Form Error',
+    'cta.form.error.description': 'Please correct the errors in the form and try again.',
+    'cta.form.validation.title': 'Validation Error',
+    'cta.form.validation.description': 'Please check the information provided and try again.',
+    'cta.form.serverError.title': 'Server Error',
+    'cta.form.serverError.description': 'An error occurred on the server. Please try again later.',
     
     // Hero section
     'hero.title': 'Personalized weekly meal plans for your family',
