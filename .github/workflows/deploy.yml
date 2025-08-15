@@ -28,6 +28,7 @@ jobs:
       VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID || 'G-SV42D9S9DM' }}
       VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
       VITE_EXPERIMENT_API_KEY: ${{ secrets.VITE_EXPERIMENT_API_KEY }}
+      VITE_USER_SERVICE_URL: ${{ vars.VITE_USER_SERVICE_URL }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
