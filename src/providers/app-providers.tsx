@@ -20,9 +20,11 @@ interface AppProvidersProps {
 export const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   // Analytics configuration
   const analyticsConfig = {
-    hotjarSiteId: import.meta.env.PROD ? 12345 : undefined, // Replace with your actual Hotjar ID in production
-    googleAnalyticsId: import.meta.env.PROD ? 'G-XXXXXXXXXX' : undefined, // Replace with your actual GA4 ID
-    enablePageTracking: import.meta.env.PROD,
+    hotjarSiteId: import.meta.env.VITE_HOTJAR_SITE_ID,
+    googleAnalyticsId: import.meta.env.VITE_GA_MEASUREMENT_ID,
+    amplitudeApiKey: import.meta.env.VITE_AMPLITUDE_API_KEY,
+    firebaseEnabled: import.meta.env.VITE_FIREBASE_ENABLED === 'true',
+    enablePageTracking: true,
   };
 
   // Error monitoring configuration
