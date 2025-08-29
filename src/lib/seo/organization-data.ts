@@ -7,10 +7,10 @@
 import { generateOrganizationStructuredData } from './seo-utils';
 
 /**
- * Organization data for Mamma's Plate Plan
+ * Organization data for Cardápio Fácil
  */
 export const organizationData = {
-  name: "Mamma's Plate Plan",
+  name: "Cardápio Fácil",
   url: "https://cardapiofacil.online",
   logo: "https://cardapiofacil.online/logo.png",
   description: "Planejamento de refeições saudáveis e deliciosas para toda a família",

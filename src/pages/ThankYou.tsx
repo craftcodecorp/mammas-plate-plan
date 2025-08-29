@@ -52,7 +52,7 @@ const ThankYou = () => {
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,
-          siteName: "Mamma's Plate Plan"
+          siteName: "Cardápio Fácil"
         },
         additionalMetaTags: [
           { name: 'robots', content: 'noindex, follow' }

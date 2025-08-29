@@ -23,16 +23,16 @@ const App = () => (
   <HelmetProvider>
     {/* Global SEO settings */}
     <SEOHead
-      title="Mamma's Plate Plan - Planejamento de refeições saudáveis"
+      title="Cardápio Fácil - Planejamento de refeições saudáveis"
       description="Planejamento de refeições saudáveis e deliciosas para toda a família"
       canonical="https://cardapiofacil.online"
       openGraph={{
-        title: "Mamma's Plate Plan - Planejamento de refeições saudáveis",
+        title: "Cardápio Fácil - Planejamento de refeições saudáveis",
         description: "Planejamento de refeições saudáveis e deliciosas para toda a família",
         type: "website",
         url: "https://cardapiofacil.online",
         image: "https://cardapiofacil.online/og-image.jpg",
-        siteName: "Mamma's Plate Plan"
+        siteName: "Cardápio Fácil"
       }}
       twitter={{
         card: "summary_large_image",

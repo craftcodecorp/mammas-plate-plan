@@ -1,6 +1,6 @@
 # A/B Testing Guide
 
-This document explains how to use the A/B testing functionality in the Mamma's Plate Plan application.
+This document explains how to use the A/B testing functionality in the Cardápio Fácil application.
 
 ## Table of Contents
 

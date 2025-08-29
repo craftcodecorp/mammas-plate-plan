@@ -1,4 +1,4 @@
-# Mamma's Plate Plan - Weekly Meal Planner
+# Cardápio Fácil - Weekly Meal Planner
 
 ## Project info
 

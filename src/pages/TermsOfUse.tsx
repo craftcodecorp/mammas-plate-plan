@@ -30,7 +30,7 @@ const TermsOfUse = () => {
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,
-          siteName: "Mamma's Plate Plan"
+          siteName: "Cardápio Fácil"
         },
         additionalMetaTags: [
           { name: 'keywords', content: t('terms.keywords') }

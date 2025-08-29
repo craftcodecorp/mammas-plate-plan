@@ -38,7 +38,7 @@ const Index = () => {
           type: 'website',
           url: canonical,
           image: `${baseUrl}/og-image.jpg`,
-          siteName: "Mamma's Plate Plan"
+          siteName: "Cardápio Fácil"
         },
         twitter: {
           card: 'summary_large_image',
