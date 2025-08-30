@@ -8,12 +8,8 @@
 // Define the gtag function and other analytics globals
 declare global {
   interface Window {
-    gtag?: <T = Record<string, unknown>>(
-      command: string,
-      target?: string | Date,
-      params?: T
-    ) => void;
-    dataLayer?: Array<Record<string, unknown>>;
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
     hj?: (command: string, ...args: unknown[]) => void;
     _hjSettings?: {
       hjid: number;
@@ -33,14 +29,16 @@ export const initializeGoogleAnalytics = (measurementId: string): void => {
   // Create data layer array if it doesn't exist
   window.dataLayer = window.dataLayer || [];
   
-  // Define gtag function
-  window.gtag = function<T = Record<string, unknown>>(
-    command: string,
-    target?: string | Date,
-    params?: T
-  ) {
-    window.dataLayer?.push({ command, target, params });
+  // Define gtag function - this is the standard implementation from Google
+  const gtag = function() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
   };
+  
+  // Assign the gtag function to window
+  // We need to use type assertion here because the standard gtag implementation
+  // uses the arguments object which doesn't match our TypeScript definition
+  window.gtag = gtag as unknown as (...args: unknown[]) => void;
   
   // Set the timestamp
   window.gtag('js', new Date());
